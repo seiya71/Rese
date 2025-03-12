@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Area;
+use App\Models\Genre;
+use App\Models\Shop;
 
 class ShopController extends Controller
 {
-    public function index(Request $request){
-        $user = Auth::user();
-        return view('index');
+    public function index(){
+        $shops = Shop::with(['area', 'genre'])->get();
+
+        return view('index', compact('shops'));
     }
 
     public function detail(){
