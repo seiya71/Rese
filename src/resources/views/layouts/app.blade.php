@@ -18,13 +18,20 @@
         <nav class="menu">
             <ul class="menu-list">
                 @if (Auth::check())
-                    <li class="menu-item"><a href="/">Home</a></li>
-                    <li class="menu-item"><a href="/logout">Logout</a></li>
-                    <li class="menu-item"><a href="/mypage">Mypage</a></li>
+                    <li class="menu-item"><a class="menu-item__text" href="/">Home</a></li>
+                    <li class="menu-item">
+                        <form action="/logout" method="post" style="display:inline;">
+                            @csrf
+                            <button class="logout-button" type="submit">Logout</button>
+                        </form>
+                    </li>
+                    <li class="menu-item"><a class="menu-item__text" href="/mypage">Mypage</a></li>
                 @else
-                    <li class="menu-item"><a href="/">Home</a></li>
-                    <li class="menu-item"><a href="/register">Register</a></li>
-                    <li class="menu-item"><a href="{{ route('login', ['redirect' => url()->current()]) }}">Login</a></li>
+                    <li class="menu-item"><a class="menu-item__text" href="/">Home</a></li>
+                    <li class="menu-item"><a class="menu-item__text" href="/register">Register</a></li>
+                    <li class="menu-item">
+                        <a class="menu-item__text" href="{{ route('login', ['redirect' => request()->fullUrl()]) }}">Login</a>
+                    </li>
                 @endif
             </ul>
         </nav>

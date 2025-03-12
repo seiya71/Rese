@@ -82,6 +82,17 @@ header {
     margin: 0;
 }
 
+.menu-item form .logout-button {
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: inherit;
+    font-size: 45px;
+    padding: 0;
+}
+
 .menu-item {
     margin: 20px 0;
 }

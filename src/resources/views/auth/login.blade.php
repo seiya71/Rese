@@ -19,6 +19,7 @@
         <div class="card-body">
             <form class="login-form" action="/login" method="post">
                 @csrf
+                <input type="hidden" name="redirect" value="{{ request('redirect') }}">
                 <div class="login-form__group">
                     <img class="icon-img" src="../images/email.png" alt="Email Icon">
                     <div class="input-wrapper">
