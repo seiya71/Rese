@@ -15,16 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ShopController::class, 'index']);
+Route::get('/', [ShopController::class, 'index'])->name('home');
 
 Route::get('/detail', [ShopController::class, 'detail']);
 
-Route::post('register', [UserController::class, 'register']);
+Route::post('register', [UserController::class, 'register'])->name('register');
 
-Route::get('/thanks', [UserController::class, 'thanks']);
+Route::get('/thanks', [UserController::class, 'thanks'])->name('thanks');
 
-Route::get('/login', [UserController::class, 'login']);
+Route::post('/login', [UserController::class, 'login'])->name('login');
 
-Route::get('/mypage', [UserController::class, 'mypage']);
+Route::get('/mypage', [UserController::class, 'mypage'])->name('mypage');
 
-Route::get('/done', [ShopController::class, 'done']);
+Route::get('/done', [ShopController::class, 'done'])->name('done');

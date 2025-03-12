@@ -17,9 +17,15 @@
         </div>
         <nav class="menu">
             <ul class="menu-list">
-                <li class="menu-item"><a href="#">Home</a></li>
-                <li class="menu-item"><a href="#">Logout</a></li>
-                <li class="menu-item"><a href="#">Mypage</a></li>
+                @if (Auth::check())
+                    <li class="menu-item"><a href="/">Home</a></li>
+                    <li class="menu-item"><a href="/logout">Logout</a></li>
+                    <li class="menu-item"><a href="/mypage">Mypage</a></li>
+                @else
+                    <li class="menu-item"><a href="/">Home</a></li>
+                    <li class="menu-item"><a href="/register">Register</a></li>
+                    <li class="menu-item"><a href="{{ route('login', ['redirect' => url()->current()]) }}">Login</a></li>
+                @endif
             </ul>
         </nav>
     </header>
