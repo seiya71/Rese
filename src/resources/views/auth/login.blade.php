@@ -17,7 +17,7 @@
     <div class="login-box">
         <h2 class="login-title">Login</h2>
         <div class="card-body">
-            <form class="login-form" action="/register" method="post">
+            <form class="login-form" action="/login" method="post">
                 @csrf
                 <div class="login-form__group">
                     <img class="icon-img" src="../images/email.png" alt="Email Icon">
