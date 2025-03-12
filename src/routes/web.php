@@ -19,7 +19,7 @@ Route::get('/', [ShopController::class, 'index']);
 
 Route::get('/detail', [ShopController::class, 'detail']);
 
-Route::get('register', [UserController::class, 'register']);
+Route::post('register', [UserController::class, 'register']);
 
 Route::get('/thanks', [UserController::class, 'thanks']);
 
