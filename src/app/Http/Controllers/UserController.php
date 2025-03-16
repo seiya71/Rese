@@ -21,10 +21,15 @@ class UserController extends Controller
         return view('auth.thanks');
     }
 
-    public function login(LoginRequest $request){
+    public function login(LoginRequest $request)
+    {
         if (Auth::attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
-            return redirect($request->input('redirect', route('home')));
+
+            $redirectTo = session('redirect_after_login', route('home'));
+            session()->forget('redirect_after_login');
+
+            return redirect($redirectTo);
         }
 
         return back();

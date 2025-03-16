@@ -30,6 +30,15 @@
                     <h5 class="card-title">{{ $shop->shop_name }}</h5>
                     <p class="card-text"><span>#</span> {{ $shop->area->area_name }}</p>
                     <p class="card-text"><span>#</span> {{ $shop->genre->genre_name }}</p>
+                    <form
+                        action="{{ in_array($shop->id, $favoriteShopIds) ? route('removelike', $shop->id) : route('addlike', $shop->id) }}"
+                        method="POST">
+                        @csrf
+                        <button type="submit" class="status-img">
+                            <img src="{{ asset(in_array($shop->id, $favoriteShopIds) ? 'images/red-heart.svg' : 'images/gray-heart.svg') }}"
+                                alt="お気に入り" width="24" height="24">
+                        </button>
+                    </form>
                     <a href="/detail" class="btn btn-outline-primary">詳細を見る</a>
                 </div>
             </div>
