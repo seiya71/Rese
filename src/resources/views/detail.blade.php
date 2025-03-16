@@ -22,28 +22,21 @@
         </div>
     </div>
     <div>
-        <form action="">
-            <input type="date">
+        <form action="{{ url('/reserve', $shop->id) }}" method="post">
+            @csrf
+            <input type="date" name="date">
             <select name="time">
-                <option value="17:00">17:00</option>
-                <option value="18:00">18:00</option>
-                <option value="19:00">19:00</option>
-                <option value="20:00">20:00</option>
-                <option value="21:00">21:00</option>
-                <option value="22:00">22:00</option>
-                <option value="23:00">23:00</option>
+                @for ($hour = 10; $hour < 24; $hour++)
+                                @php
+    $time = sprintf('%02d:00', $hour);
+                                @endphp
+                                <option value="{{ $time }}">{{ $time }}</option>
+                @endfor
             </select>
-            <select name="guest">
-                <option value="1">１人</option>
-                <option value="2">２人</option>
-                <option value="3">３人</option>
-                <option value="4">４人</option>
-                <option value="5">５人</option>
-                <option value="6">６人</option>
-                <option value="7">７人</option>
-                <option value="8">８人</option>
-                <option value="9">９人</option>
-                <option value="10">１０人</option>
+            <select name="guest_count">
+                @for ($i = 1; $i <= 10; $i++)
+                    <option value="{{ $i }}">{{ $i }}人</option>
+                @endfor
             </select>
             <div>
                 <div>

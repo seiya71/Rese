@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Session;
 
 Route::get('/', [ShopController::class, 'index'])->name('home');
 
-Route::get('/detail/{shopId}', [ShopController::class, 'detail']);
+Route::get('/detail/{shopId}', [ShopController::class, 'detail'])->name('detail');
 
 Route::post('register', [UserController::class, 'register'])->name('register');
 
@@ -28,11 +28,12 @@ Route::post('/login', [UserController::class, 'login'])->name('login');
 
 Route::get('/mypage', [UserController::class, 'mypage'])->name('mypage');
 
-Route::get('/done', [ShopController::class, 'done'])->name('done');
+Route::get('/done/{shopId}', function ($shopId) {
+    return view('done', ['shopId' => $shopId]);
+})->name('done');
 
-Route::post('/addlike/{shopId}', [ShopController::class, 'addlike'])->name('addlike');
+Route::post('/togglelike/{shopId}', [ShopController::class, 'toggleLike'])->name('togglelike');
 
-Route::post('/removelike/{shopId}', [ShopController::class, 'removelike'])->name('removelike');
 
 Route::post('/clear-redirect-session', function () {
     Session::forget('redirect_after_login');
@@ -40,3 +41,5 @@ Route::post('/clear-redirect-session', function () {
 })->name('clear_redirect_session');
 
 Route::get('/search', [ShopController::class, 'search'])->name('search');
+
+Route::post('/reserve/{shopId}', [ShopController::class, 'reservation'])->name('reservation');

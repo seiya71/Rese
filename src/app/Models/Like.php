@@ -19,4 +19,20 @@ class Like extends Model
     {
         return $this->belongsTo(Shop::class);
     }
+
+    public static function toggleFavorite($userId, $shopId)
+    {
+        $like = self::where('user_id', $userId)->where('shop_id', $shopId)->first();
+
+        if ($like) {
+            $like->delete();
+            return false;
+        } else {
+            self::create([
+                'user_id' => $userId,
+                'shop_id' => $shopId
+            ]);
+            return true;
+        }
+    }
 }
