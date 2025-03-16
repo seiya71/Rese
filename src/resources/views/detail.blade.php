@@ -7,12 +7,18 @@
 @section('content')
     <div>
         <a href="">＜</a>
-        <h3>仙人</h3>
+        <h3>{{ $shop->shop_name }}</h3>
         <img src="" alt="店舗画像">
-        <p>#東京</p>
-        <p>#寿司</p>
+        <p class="card-text">
+            <span>#</span>
+            {{ $shop->area->area_name }}
+        </p>
+        <p class="card-text">
+            <span>#</span>
+            {{ $shop->genre->genre_name }}
+        </p>
         <div>
-            料理長厳選の食材から作る寿司を用いたコースをぜひお楽しみください。食材・味・価格、お客様の満足度を徹底的に追求したお店です。特別な日のお食事、ビジネス接待まで気軽に使用することができます。
+            {{ $shop->introduction }}
         </div>
     </div>
     <div>

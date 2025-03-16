@@ -88,8 +88,10 @@ class ShopController extends Controller
         return view('index', compact('shops', 'favoriteShopIds', 'areas', 'genres'));
     }
 
-    public function detail(){
-        return view('detail');
+    public function detail($id){
+        $shop = Shop::findOrFail($id);
+
+        return view('detail', compact('shop'));
     }
 
     public function done(){

@@ -44,7 +44,7 @@
                                 alt="お気に入り" width="24" height="24">
                         </button>
                     </form>
-                    <a href="/detail" class="btn btn-outline-primary">詳細を見る</a>
+                    <a href="{{ url('/detail', $shop->id) }}" class="btn btn-outline-primary">詳細を見る</a>
                 </div>
             </div>
         @endforeach
