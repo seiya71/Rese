@@ -41,7 +41,6 @@
     </div>
 @endsection
 
-{{-- ログイン成功後のリダイレクト処理 --}}
 @if(session()->has('redirect_after_login'))
     @include('auth.post_redirect')
 @endif
