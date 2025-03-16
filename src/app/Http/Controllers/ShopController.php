@@ -8,6 +8,7 @@ use App\Models\Genre;
 use App\Models\Shop;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Like;
+use App\Models\Reservation;
 
 class ShopController extends Controller
 {
@@ -29,7 +30,7 @@ class ShopController extends Controller
         return view('index', compact('shops', 'favoriteShopIds', 'areas', 'genres'));
     }
 
-    public function addlike($shopId)
+    public function toggleLike($shopId)
     {
         $user = Auth::user();
 
@@ -38,31 +39,13 @@ class ShopController extends Controller
             return redirect()->route('login');
         }
 
-        $userId = Auth::id();
+        $isFavorite = Like::toggleFavorite($user->id, $shopId);
 
-        if (!Like::where('user_id', $userId)->where('shop_id', $shopId)->exists()) {
-            Like::create([
-                'user_id' => $userId,
-                'shop_id' => $shopId
-            ]);
+        if ($isFavorite) {
+            return redirect()->back();
+        } else {
+            return redirect()->back();
         }
-
-        return redirect()->back();
-    }
-
-    public function removelike($shopId)
-    {
-        $user = Auth::user();
-
-        if (!$user) {
-            return redirect()->route('login');
-        }
-
-        Like::where('user_id', $user->id)
-            ->where('shop_id', $shopId)
-            ->delete();
-
-        return redirect()->back();
     }
 
     public function search(Request $request)
@@ -92,6 +75,22 @@ class ShopController extends Controller
         $shop = Shop::findOrFail($id);
 
         return view('detail', compact('shop'));
+    }
+
+    public function reservation(Request $request, $shopId)
+    {
+        $user = Auth::user();
+
+        if (!$user) {
+            session(['redirect_after_login' => route('detail', $shopId)]);
+            return redirect()->route('login');
+        }
+
+        $reservationDatetime = $request->date . ' ' . $request->time;
+
+        Reservation::createReservation($user->id, $shopId, $reservationDatetime, $request->guest_count);
+
+        return redirect()->route('done', ['shopId' => $shopId]);
     }
 
     public function done(){
