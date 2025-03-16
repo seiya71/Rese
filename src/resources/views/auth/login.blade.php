@@ -14,12 +14,13 @@
     @error('password')
         <p>{{ $message }}</p>
     @enderror
+
     <div class="login-box">
         <h2 class="login-title">Login</h2>
         <div class="card-body">
             <form class="login-form" action="/login" method="post">
                 @csrf
-                <input type="hidden" name="redirect" value="{{ request('redirect') }}">
+                <input type="hidden" name="redirect" value="{{ session('redirect_after_login') }}">
                 <div class="login-form__group">
                     <img class="icon-img" src="../images/email.png" alt="Email Icon">
                     <div class="input-wrapper">
@@ -39,3 +40,8 @@
         </div>
     </div>
 @endsection
+
+{{-- ログイン成功後のリダイレクト処理 --}}
+@if(session()->has('redirect_after_login'))
+    @include('auth.post_redirect')
+@endif

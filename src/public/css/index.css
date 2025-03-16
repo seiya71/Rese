@@ -1,0 +1,6 @@
+.heart {
+    color: gray;
+    /* デフォルトはグレー */
+    width: 50px;
+    height: 50px;
+}

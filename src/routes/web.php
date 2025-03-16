@@ -3,6 +3,7 @@
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,17 @@ Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/mypage', [UserController::class, 'mypage'])->name('mypage');
 
 Route::get('/done', [ShopController::class, 'done'])->name('done');
+
+Route::post('/addlike/{shopId}', [ShopController::class, 'addlike'])->name('addlike');
+
+Route::post('/removelike/{shopId}', [ShopController::class, 'removelike'])->name('removelike');
+
+Route::post('/clear-redirect-session', function () {
+    Session::forget('redirect_after_login');
+    return response()->json(['status' => 'cleared']);
+})->name('clear_redirect_session');
+
+Route::post('/clear-redirect-session', function () {
+    session()->forget('redirect_after_login');
+    return response()->json(['status' => 'cleared']);
+})->name('clear_redirect_session');
