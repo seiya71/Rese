@@ -23,7 +23,10 @@ class ShopController extends Controller
 
         $shops = Shop::with(['area', 'genre'])->get();
 
-        return view('index', compact('shops', 'favoriteShopIds'));
+        $areas = Area::all();
+        $genres = Genre::all();
+
+        return view('index', compact('shops', 'favoriteShopIds', 'areas', 'genres'));
     }
 
     public function addlike($shopId)
@@ -60,6 +63,29 @@ class ShopController extends Controller
             ->delete();
 
         return redirect()->back();
+    }
+
+    public function search(Request $request)
+    {
+        $user = Auth::user();
+
+        $favoriteShopIds = [];
+
+        if ($user) {
+            $favoriteShopIds = $user->likes()->pluck('shop_id')->toArray();
+
+        }
+
+        $shops = Shop::with(['area', 'genre'])
+            ->AreaSearch($request->area)
+            ->GenreSearch($request->genre)
+            ->KeywordSearch($request->keyword)
+            ->get();
+
+        $areas = Area::all();
+        $genres = Genre::all();
+
+        return view('index', compact('shops', 'favoriteShopIds', 'areas', 'genres'));
     }
 
     public function detail(){

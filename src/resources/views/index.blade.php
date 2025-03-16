@@ -5,17 +5,22 @@
 @endsection
 
 @section('search')
-    <form action="/search" method="GET" class="search-form">
-        <select name="region">
+    <form class="search-form" action="/search" method="GET">
+        <select name="area">
             <option value="">All area</option>
-            <option value="tokyo" {{ request('region') === 'tokyo' ? 'selected' : '' }}>東京</option>
-            <option value="osaka" {{ request('region') === 'osaka' ? 'selected' : '' }}>大阪</option>
+            @foreach ($areas as $area)
+                <option value="{{ $area->id }}" {{ request('area') == $area->id ? 'selected' : '' }}>
+                    {{ $area['area_name'] }}
+                </option>
+            @endforeach
         </select>
-
         <select name="genre">
             <option value="">All genre</option>
-            <option value="italian" {{ request('genre') === 'italian' ? 'selected' : '' }}>イタリアン</option>
-            <option value="sushi" {{ request('genre') === 'sushi' ? 'selected' : '' }}>寿司</option>
+            @foreach ($genres as $genre)
+                <option value="{{ $genre->id }}" {{ request('genre') == $genre->id ? 'selected' : '' }}>
+                    {{ $genre['genre_name'] }}
+                </option>
+            @endforeach
         </select>
         <input type="text" name="keyword" placeholder="Search" value="{{ request('keyword') }}">
     </form>

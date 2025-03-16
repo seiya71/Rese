@@ -39,7 +39,4 @@ Route::post('/clear-redirect-session', function () {
     return response()->json(['status' => 'cleared']);
 })->name('clear_redirect_session');
 
-Route::post('/clear-redirect-session', function () {
-    session()->forget('redirect_after_login');
-    return response()->json(['status' => 'cleared']);
-})->name('clear_redirect_session');
+Route::get('/search', [ShopController::class, 'search'])->name('search');
