@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Session;
 
 Route::get('/', [ShopController::class, 'index'])->name('home');
 
-Route::get('/detail', [ShopController::class, 'detail']);
+Route::get('/detail/{shopId}', [ShopController::class, 'detail']);
 
 Route::post('register', [UserController::class, 'register'])->name('register');
 
