@@ -9,27 +9,40 @@
     <div>
         <h3>予約状況</h3>
         <div>
+        @foreach ($reservations as $reservation)
             <div>
-                <p>予約1</p>
-                <p>✕</p>
+                <div>
+                    <p>予約{{ $loop->iteration }}</p>
+                    <form action="{{ route('reservation.cancel', $reservation->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger" type="submit">
+                            ✕
+                        </button>
+                    </form>
+                </div>
+                <div>
+                    <span>Shop</span>
+                    <span>{{ $reservation->shop->shop_name }}</span>
+                </div>
+                <div>
+                    <span>Date</span>
+                    <span>
+                        {{ Carbon\Carbon::parse($reservation->reservation_datetime)->toDateString() }}
+                    </span>
+                </div>
+                <div>
+                    <span>Time</span>
+                    <span>
+                        {{ Carbon\Carbon::parse($reservation->reservation_datetime)->format('H:i') }}
+                    </span>
+                </div>
+                <div>
+                    <span>Number</span>
+                    <span>{{ $reservation->guest_count }}人</span>
+                </div>
             </div>
-            <div>
-                <span>Shop</span>
-                <span>{{ $reservation->shop->shop_name }}</span>
-            </div>
-            <div>
-                <span>Date</span>
-                <span>{{ $date }}</span>
-            </div>
-            <div>
-                <span>Time</span>
-                <span>{{ $time }}</span>
-            </div>
-            <div>
-                <span>Number</span>
-                <span>{{ $reservation->guest_count }}人</span>
-            </div>
-        </div>
+        @endforeach
     </div>
     <div>
         <h3>お気に入り店舗</h3>
