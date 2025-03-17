@@ -71,10 +71,24 @@ class ShopController extends Controller
         return view('index', compact('shops', 'favoriteShopIds', 'areas', 'genres'));
     }
 
-    public function detail($id){
-        $shop = Shop::findOrFail($id);
+    public function detail($shopId){
+        $user = Auth::user();
+        $shop = Shop::with(['area', 'genre'])->findOrFail($shopId);
 
-        return view('detail', compact('shop'));
+        if (request()->has(['date', 'time', 'guest_count'])) {
+            session([
+                'temp_reservation' => [
+                    'shop_id' => $shopId,
+                    'date' => request('date'),
+                    'time' => request('time'),
+                    'guest_count' => request('guest_count')
+                ]
+            ]);
+        }
+
+        $tempReservation = session('temp_reservation');
+
+        return view('detail', compact('shop', 'tempReservation'));
     }
 
     public function reservation(Request $request, $shopId)
@@ -86,12 +100,28 @@ class ShopController extends Controller
             return redirect()->route('login');
         }
 
-        $reservationDatetime = $request->date . ' ' . $request->time;
+        $tempReservation = session('temp_reservation');
 
-        Reservation::createReservation($user->id, $shopId, $reservationDatetime, $request->guest_count);
+        if (!$tempReservation || $tempReservation['shop_id'] != $shopId) {
+            return redirect()->back();
+        }
+
+        $reservationDatetime = $tempReservation['date'] . ' ' . $tempReservation['time'];
+
+        Reservation::createReservation(
+            $user->id,
+            $shopId,
+            $reservationDatetime,
+            $tempReservation['guest_count']
+        );
+
+        session()->forget('temp_reservation');
 
         return redirect()->route('done', ['shopId' => $shopId]);
     }
+
+
+
 
     public function done(){
         return view('done');
