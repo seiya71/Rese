@@ -120,9 +120,6 @@ class ShopController extends Controller
         return redirect()->route('done', ['shopId' => $shopId]);
     }
 
-
-
-
     public function done(){
         return view('done');
     }

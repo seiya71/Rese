@@ -43,3 +43,5 @@ Route::post('/clear-redirect-session', function () {
 Route::get('/search', [ShopController::class, 'search'])->name('search');
 
 Route::post('/reserve/{shopId}', [ShopController::class, 'reservation'])->name('reservation');
+
+Route::delete('/reservation/{id}', [UserController::class, 'cancel'])->name('reservation.cancel');

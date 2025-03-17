@@ -42,20 +42,24 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $reserve = Reservation::with('shop')->find($user->id);
+        $reservations = Reservation::with('shop')->where('user_id', $user->id)->get();
+
 
         $likeShops = Like::with(['shop.area', 'shop.genre'])->where('user_id', $user->id)->get();
 
-        return view('mypage', [
-            'likeShops' => $likeShops,
-            'user' => $user,
-            'reservation' => $reserve,
-            'date' => Carbon::parse($reserve->reservation_datetime)->toDateString(),
-            'time' => Carbon::parse($reserve->reservation_datetime)->format('H:i')
-        ]);
+        return view('mypage', compact('user', 'reservations', 'likeShops'));
     }
 
     public function done(){
         return view('done');
     }
+
+    public function cancel($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        $reservation->delete();
+
+        return redirect()->route('mypage');
+    }
+
 }
