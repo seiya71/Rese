@@ -15,9 +15,9 @@ class Like extends Model
         'shop_id'
     ];
 
-    public function item(): BelongsTo
+    public function shop()
     {
-        return $this->belongsTo(Shop::class);
+        return $this->belongsTo(Shop::class, 'shop_id');
     }
 
     public static function toggleFavorite($userId, $shopId)
