@@ -25,4 +25,9 @@ class Reservation extends Model
             'guest_count' => $guestCount
         ]);
     }
+
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class, 'shop_id');
+    }
 }
