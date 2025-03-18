@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/index.css') }}">
 @endsection
 
 @section('search')
@@ -27,22 +27,26 @@
 @endsection
 
 @section('content')
-    <div>
+    <div class="shop-list">
         @foreach ($shops as $shop)
-            <div class="card">
-                <div>店舗画像</div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ $shop->shop_name }}</h5>
-                    <p class="card-text"><span>#</span> {{ $shop->area->area_name }}</p>
-                    <p class="card-text"><span>#</span> {{ $shop->genre->genre_name }}</p>
-                    <form action="{{ route('togglelike', $shop->id) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="status-img">
-                            <img src="{{ asset(in_array($shop->id, $favoriteShopIds) ? 'images/red-heart.svg' : 'images/gray-heart.svg') }}"
-                                alt="お気に入り" width="24" height="24">
-                        </button>
-                    </form>
-                    <a href="{{ url('/detail', $shop->id) }}" class="btn btn-outline-primary">詳細を見る</a>
+            <div class="shop-card">
+                <div class="shop-image">店舗画像</div>
+                <div class="shop-info">
+                    <h5 class="shop-name">{{ $shop->shop_name }}</h5>
+                    <div class="shop-meta">
+                        <p class="shop-category"><span>#</span> {{ $shop->area->area_name }}</p>
+                        <p class="shop-category"><span>#</span> {{ $shop->genre->genre_name }}</p>
+                    </div>
+                    <div class="shop-actions">
+                        <a class="detail-button" href="{{ url('/detail', $shop->id) }}">詳細を見る</a>
+                        <form class="favorite-form" action="{{ route('togglelike', $shop->id) }}" method="POST">
+                            @csrf
+                            <button class="favorite-button" type="submit">
+                                <img class="favorite-heart" src="{{ asset(in_array($shop->id, $favoriteShopIds) ? 'images/red-heart.svg' : 'images/gray-heart.svg') }}"
+                                    alt="お気に入り" width="32" height="32">
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         @endforeach
