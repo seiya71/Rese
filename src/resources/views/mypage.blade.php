@@ -54,6 +54,12 @@
                 <span>{{ $like->shop->area->area_name }}</span>
                 <span>#</span>
                 <span>{{ $like->shop->genre->genre_name }}</span>
+                <form action="{{ route('togglelike', $like->shop->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="status-img">
+                        <img src="{{ asset('images/red-heart.svg') }}" alt="お気に入り解除" width="24" height="24">
+                    </button>
+                </form>
                 <a href="{{ url('/detail', $like->shop->id) }}" class="btn btn-outline-primary">詳細を見る</a>
             </div>
         @endforeach
