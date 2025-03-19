@@ -1,0 +1,18 @@
+.shop-details {
+    position: sticky;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    z-index: 1001;
+}
+
+.detail-left {
+    display: flex;
+}
+
+.detail-right {
+    display: flex;
+}
