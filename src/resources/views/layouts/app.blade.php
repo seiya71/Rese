@@ -11,9 +11,13 @@
     <header>
         <input type="checkbox" id="menu-toggle" class="menu-toggle">
         <div class="menu-header">
-            <label for="menu-toggle" class="menu-button"></label>
-            <span class="site-name">Rese</span>
-            @yield('search')
+            <div class="menu-left">
+                <label for="menu-toggle" class="menu-button"></label>
+                <span class="site-name">Rese</span>
+            </div>
+            <div class="menu-right">
+                @yield('search')
+            </div>
         </div>
         <nav class="menu">
             <ul class="menu-list">

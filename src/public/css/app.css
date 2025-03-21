@@ -21,9 +21,22 @@ header {
     top: 20px;
     left: 20px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 20px;
     z-index: 1001;
+}
+
+.menu-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.menu-right {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .menu-button {

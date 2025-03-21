@@ -6,25 +6,34 @@
 
 @section('search')
     <form class="search-form" action="/search" method="GET">
-        <select name="area">
-            <option value="">All area</option>
-            @foreach ($areas as $area)
-                <option value="{{ $area->id }}" {{ request('area') == $area->id ? 'selected' : '' }}>
-                    {{ $area['area_name'] }}
-                </option>
-            @endforeach
-        </select>
-        <select name="genre">
-            <option value="">All genre</option>
-            @foreach ($genres as $genre)
-                <option value="{{ $genre->id }}" {{ request('genre') == $genre->id ? 'selected' : '' }}>
-                    {{ $genre['genre_name'] }}
-                </option>
-            @endforeach
-        </select>
-        <input type="text" name="keyword" placeholder="Search" value="{{ request('keyword') }}">
+        <div class="search-select">
+            <select name="area" class="search-dropdown">
+                <option value="">All area</option>
+                @foreach ($areas as $area)
+                    <option value="{{ $area->id }}" {{ request('area') == $area->id ? 'selected' : '' }}>
+                        {{ $area['area_name'] }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="search-select">
+            <select name="genre" class="search-dropdown">
+                <option value="">All genre</option>
+                @foreach ($genres as $genre)
+                    <option value="{{ $genre->id }}" {{ request('genre') == $genre->id ? 'selected' : '' }}>
+                        {{ $genre['genre_name'] }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="search-input-container">
+            <input type="text" name="keyword" class="search-input" placeholder="Search" value="{{ request('keyword') }}">
+        </div>
     </form>
 @endsection
+
 
 @section('content')
     <div class="shop-list">
