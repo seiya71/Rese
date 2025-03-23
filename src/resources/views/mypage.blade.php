@@ -5,6 +5,11 @@
 @endsection
 
 @section('content')
+    @if (session('status'))
+        <div class="alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
     <h2 class="user-name">{{ $user->name }}さん</h2>
     <div class="user-info">
         <div class="info-left">
@@ -21,30 +26,60 @@
                             </button>
                         </form>
                     </div>
-                    <div class="info-detail">
-                        <div class="info-row">
-                            <div class="label">Shop</div>
-                            <div class="value">{{ $reservation->shop->shop_name }}</div>
-                        </div>
-                        <div class="info-row">
-                            <div class="label">Date</div>
-                            <div class="value">
-                                {{ Carbon\Carbon::parse($reservation->reservation_datetime)->toDateString() }}
+                    <div class="info-edit">
+                        <div class="info-detail">
+                            <div class="info-row">
+                                <div class="label">Shop</div>
+                                <div class="value">{{ $reservation->shop->shop_name }}</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="label">Date</div>
+                                <div class="value">
+                                    {{ Carbon\Carbon::parse($reservation->reservation_datetime)->toDateString() }}
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="label">Time</div>
+                                <div class="value">
+                                    {{ Carbon\Carbon::parse($reservation->reservation_datetime)->format('H:i') }}
+                                </div>
+                            </div>
+                            <div class="info-row">
+                                <div class="label">Number</div>
+                                <div class="value">
+                                    {{ $reservation->guest_count }}人
+                                </div>
                             </div>
                         </div>
-                        <div class="info-row">
-                            <div class="label">Time</div>
-                            <div class="value">
-                                {{ Carbon\Carbon::parse($reservation->reservation_datetime)->format('H:i') }}
+                        <form class="reserve-edit" action="{{ route('reservation.update', $reservation->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+
+                            <div class="edit-fields">
+                                <label>
+                                    <input type="date" name="date"
+                                        value="{{ \Carbon\Carbon::parse($reservation->reservation_datetime)->toDateString() }}" required>
+                                </label>
+                                <select class="reserve-input__item" name="time" required>
+                                    @for ($hour = 10; $hour < 24; $hour++)
+                                        @php $time = sprintf('%02d:00', $hour); @endphp
+                                        <option value="{{ $time }}" {{ \Carbon\Carbon::parse($reservation->reservation_datetime)->format('H:i') === $time ? 'selected' : '' }}>
+                                            {{ $time }}
+                                        </option>
+                                    @endfor
+                                </select>
+                                <select class="reserve-input__item" name="guest_count" required>
+                                    @for ($i = 1; $i <= 10; $i++)
+                                        <option value="{{ $i }}" {{ $reservation->guest_count == $i ? 'selected' : '' }}>
+                                            {{ $i }}人
+                                        </option>
+                                    @endfor
+                                </select>
                             </div>
-                        </div>
-                        <div class="info-row">
-                            <div class="label">Number</div>
-                            <div class="value">
-                                {{ $reservation->guest_count }}人
-                            </div>
-                        </div>
+                            <button type="submit" class="update-button">変更</button>
+                        </form>
                     </div>
+
                 </div>
             @endforeach
         </div>

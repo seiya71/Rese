@@ -70,6 +70,12 @@ main {
     cursor: pointer;
 }
 
+.info-edit {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
 .info-detail {
     display: flex;
     flex-direction: column;
@@ -92,6 +98,11 @@ main {
 .value {
     color: white;
     flex: 1;
+}
+
+.edit-fields {
+    display: flex;
+    flex-direction: column;
 }
 
 .shop-list {
