@@ -45,3 +45,5 @@ Route::get('/search', [ShopController::class, 'search'])->name('search');
 Route::post('/reserve/{shopId}', [ShopController::class, 'reservation'])->name('reservation');
 
 Route::delete('/reservation/{id}', [UserController::class, 'cancel'])->name('reservation.cancel');
+
+Route::put('/reservation/update/{id}', [UserController::class, 'update'])->name('reservation.update');

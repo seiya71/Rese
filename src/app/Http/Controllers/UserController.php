@@ -62,4 +62,24 @@ class UserController extends Controller
         return redirect()->route('mypage');
     }
 
+    public function update(Request $request, $id)
+    {
+        $reservation = Reservation::findOrFail($id);
+
+        $request->validate([
+            'date' => 'required|date',
+            'time' => 'required',
+            'guest_count' => 'required|integer|min:1',
+        ]);
+
+        // 日付と時間を合わせて datetime にする
+        $datetime = $request->date . ' ' . $request->time;
+
+        $reservation->reservation_datetime = $datetime;
+        $reservation->guest_count = $request->guest_count;
+        $reservation->save();
+
+        return redirect()->route('mypage')->with('status', '予約を変更しました');
+    }
+
 }
