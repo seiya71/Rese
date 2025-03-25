@@ -15,13 +15,32 @@ class UserController extends Controller
 {
     public function register(RegisterRequest $request)
     {
-        User::createUser($request->all());
+        $user = User::createUser($request->all());
 
-        return redirect('/thanks');
+        Auth::login($user);
+
+        $user->sendEmailVerificationNotification();
+
+        return redirect('/email/verify');
     }
 
     public function thanks(){
+
+        $redirectTo = session('redirect_after_login', route('home'));
+        session()->forget('redirect_after_login');
+
+        Auth::logout();
+
         return view('auth.thanks');
+    }
+
+    public function showLoginForm(Request $request)
+    {
+        if ($request->has('redirect')) {
+            session(['redirect_after_login' => $request->query('redirect')]);
+        }
+
+        return view('auth.login');
     }
 
     public function login(LoginRequest $request)
@@ -29,13 +48,32 @@ class UserController extends Controller
         if (Auth::attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
 
-            $redirectTo = session('redirect_after_login', route('home'));
+            $user = Auth::user();
+
+            if (!$user->hasVerifiedEmail()) {
+                Auth::logout();
+                return redirect('/email/verify')->with('message', 'メールアドレスを確認してください。');
+            }
+
+
+            $redirectTo = session('redirect_after_login');
+
+            if ($redirectTo && $this->isPostOnlyPath($redirectTo)) {
+                $redirectTo = route('item.index');
+            }
+
+            $redirectTo ??= route('home');
             session()->forget('redirect_after_login');
 
             return redirect($redirectTo);
         }
 
         return back();
+    }
+
+    private function isPostOnlyPath($url)
+    {
+        return str_contains($url, '/favorite');
     }
 
     public function mypage()
