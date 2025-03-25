@@ -5,15 +5,17 @@
 @endsection
 
 @section('content')
-    @error('name')
-        <p>{{ $message }}</p>
-    @enderror
-    @error('email')
-        <p>{{ $message }}</p>
-    @enderror
-    @error('password')
-        <p>{{ $message }}</p>
-    @enderror
+    <div class="error-box">
+        @error('name')
+            <p>{{ $message }}</p>
+        @enderror
+        @error('email')
+            <p>{{ $message }}</p>
+        @enderror
+        @error('password')
+            <p>{{ $message }}</p>
+        @enderror
+    </div>
     <div class="register-box">
         <h2 class="register-title">Registration</h2>
         <div class="card-body">
