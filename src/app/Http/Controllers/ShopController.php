@@ -9,6 +9,7 @@ use App\Models\Shop;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Like;
 use App\Models\Reservation;
+use App\Http\Requests\ReservationRequest;
 
 class ShopController extends Controller
 {
@@ -91,7 +92,7 @@ class ShopController extends Controller
         return view('detail', compact('shop', 'tempReservation'));
     }
 
-    public function reservation(Request $request, $shopId)
+    public function reservation(ReservationRequest $request, $shopId)
     {
         $user = Auth::user();
 

@@ -63,7 +63,17 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="error-box">
+                    @error('date')
+                        <p>{{ $message }}</p>
+                    @enderror
+                    @error('time')
+                        <p>{{ $message }}</p>
+                    @enderror
+                    @error('guest_count')
+                        <p>{{ $message }}</p>
+                    @enderror
+                </div>
                 <form class="reserve-submit-form" action="{{ route('reservation', $shop->id) }}" method="POST">
                     @csrf
                     <button class="reserve-button" type="submit">予約する</button>
