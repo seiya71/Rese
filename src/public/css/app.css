@@ -1,0 +1,118 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eee;
+    max-width: 1920px;
+    min-width: 1100px;
+    height: 900px;
+    margin: 50px;
+}
+
+header {
+    height: 100px;
+    margin: 0px 50px;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.menu-header {
+    position: sticky;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    z-index: 1001;
+}
+
+.menu-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.menu-right {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.menu-button {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    background-image: url("../images/logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: background-image 0.3s ease-in-out;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.menu-toggle:checked+.menu-header .menu-button {
+    background-image: url("../images/close.png");
+}
+
+.site-name {
+    font-size: 45px;
+    font-weight: bold;
+    color: blue;
+}
+
+.menu-toggle:checked+.menu-header .site-name {
+    display: none;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: white;
+    color: white;
+    text-align: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.menu-toggle:checked~.menu {
+    visibility: visible;
+    opacity: 1;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item form .logout-button {
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: inherit;
+    font-size: 45px;
+    padding: 0;
+}
+
+.menu-item {
+    margin: 20px 0;
+}
+
+.menu-item a {
+    color: blue;
+    text-decoration: none;
+    font-size: 45px;
+}
