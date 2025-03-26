@@ -94,12 +94,12 @@ class ShopController extends Controller
 
     public function reservation(ReservationRequest $request, $shopId)
     {
-        $user = Auth::user();
-
-        if (!$user) {
-            session(['redirect_after_login' => route('detail', $shopId)]);
+        if (!Auth::check()) {
+            session(['redirect_after_login' => route('detail', ['id' => $shopId])]);
             return redirect()->route('login');
         }
+
+        $user = Auth::user();
 
         $tempReservation = session('temp_reservation');
 

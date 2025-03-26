@@ -58,8 +58,9 @@ class UserController extends Controller
 
             $redirectTo = session('redirect_after_login');
 
+
             if ($redirectTo && $this->isPostOnlyPath($redirectTo)) {
-                $redirectTo = route('item.index');
+                $redirectTo = route('home');
             }
 
             $redirectTo ??= route('home');
@@ -73,7 +74,7 @@ class UserController extends Controller
 
     private function isPostOnlyPath($url)
     {
-        return str_contains($url, '/favorite');
+        return str_contains($url, '/favorite') || str_contains($url, '/togglelike');
     }
 
     public function mypage()
