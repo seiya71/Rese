@@ -16,16 +16,18 @@
             <h3 class="info-title">予約状況</h3>
             @foreach ($reservations as $reservation)
                 <div class="reserve-info">
-                    <p class="reserve-title">予約{{ $loop->iteration }}</p>
+                    <div class="reserve-info__nav">
+                        <p class="reserve-title">予約{{ $loop->iteration }}</p>
+                        <form class="reserve-cancel" action="{{ route('reservation.cancel', $reservation->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="cancel-button" type="submit">
+                                ✕
+                            </button>
+                        </form>
+                    </div>
                     <input class="edit-toggle" type="checkbox" id="edit-toggle-{{ $reservation->id }}" hidden>
-                    <label for="edit-toggle-{{ $reservation->id }}">変更</label>
-                    <form class="reserve-cancel" action="{{ route('reservation.cancel', $reservation->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="cancel-button" type="submit">
-                            ✕
-                        </button>
-                    </form>
+                    <label class="edit-button" for="edit-toggle-{{ $reservation->id }}">変更</label>
                     <div class="info-detail">
                         <div class="info-row">
                             <div class="label">Shop</div>
@@ -50,34 +52,43 @@
                             </div>
                         </div>
                     </div>
-                    <div class="reserve-edit">
-                        <form action="{{ route('reservation.update', $reservation->id) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <div class="edit-fields">
-                                <label>
-                                    <input type="date" name="date"
-                                        value="{{ \Carbon\Carbon::parse($reservation->reservation_datetime)->toDateString() }}" required>
-                                </label>
-                                <select class="reserve-input__item" name="time" required>
-                                    @for ($hour = 10; $hour < 24; $hour++)
-                                        @php $time = sprintf('%02d:00', $hour); @endphp
-                                        <option value="{{ $time }}" {{ \Carbon\Carbon::parse($reservation->reservation_datetime)->format('H:i') === $time ? 'selected' : '' }}>
-                                            {{ $time }}
-                                        </option>
-                                    @endfor
-                                </select>
-                                <select class="reserve-input__item" name="guest_count" required>
-                                    @for ($i = 1; $i <= 10; $i++)
-                                        <option value="{{ $i }}" {{ $reservation->guest_count == $i ? 'selected' : '' }}>
-                                            {{ $i }}人
-                                        </option>
-                                    @endfor
-                                </select>
-                            </div>
-                            <button type="submit" class="update-button">変更する</button>
-                        </form>
-                    </div>
+                    <form class="reserve-edit" action="{{ route('reservation.update', $reservation->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="info-row">
+                            <div class="label">Shop</div>
+                            <div class="value">{{ $reservation->shop->shop_name }}</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="label">Date</div>
+                            <label class="edit-value">
+                                <input type="date" name="date"
+                                    value="{{ \Carbon\Carbon::parse($reservation->reservation_datetime)->toDateString() }}" required>
+                            </label>
+                        </div>
+                        <div class="info-row">
+                            <div class="label">Time</div>
+                            <select class="edit-value" name="time" required>
+                                @for ($hour = 10; $hour < 24; $hour++)
+                                    @php $time = sprintf('%02d:00', $hour); @endphp
+                                    <option value="{{ $time }}" {{ \Carbon\Carbon::parse($reservation->reservation_datetime)->format('H:i') === $time ? 'selected' : '' }}>
+                                        {{ $time }}
+                                    </option>
+                                @endfor
+                            </select>
+                        </div>
+                        <div class="info-row">
+                            <div class="label">Number</div>
+                            <select class="edit-value" name="guest_count" required>
+                                @for ($i = 1; $i <= 10; $i++)
+                                    <option value="{{ $i }}" {{ $reservation->guest_count == $i ? 'selected' : '' }}>
+                                        {{ $i }}人
+                                    </option>
+                                @endfor
+                            </select>
+                        </div>
+                        <button type="submit" class="update-button">更新する</button>
+                    </form>
                 </div>
             @endforeach
         </div>
