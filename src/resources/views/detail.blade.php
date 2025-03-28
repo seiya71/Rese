@@ -14,6 +14,29 @@
                 <p class="category-item">#{{ $shop->genre->genre_name }}</p>
             </div>
             <p class="introduction">{{ $shop->introduction }}</p>
+            <div class="user-comment">
+                <h5 class="comment-title">利用者のコメント</h5>
+                @foreach ($reviews as $review)
+                    <div>
+                        <div>
+                            <p>{{ $review->user->name }}</p>
+                        </div>
+                        <div>
+                            <p>{{ $review->comment }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <div class="comment-edit">
+                <div class="edit-nav">
+                    <h5 class="comment-title">お店へのコメント</h5>
+                </div>
+                <form action="{{ route('review', ['shop' => $shop->id]) }}" method="post">
+                    @csrf
+                    <textarea name="comment" id="comment"></textarea>
+                    <button type="submit">コメントを送信する</button>
+                </form>
+            </div>
         </div>
         <div class="detail-right">
             <div class="reserve">

@@ -89,7 +89,13 @@ class ShopController extends Controller
 
         $tempReservation = session('temp_reservation');
 
-        return view('detail', compact('shop', 'tempReservation'));
+        $reviews = \App\Models\Review::where('shop_id', $shopId)
+            ->with('user') // ユーザー情報をつける（名前など）
+            ->latest()
+            ->get();
+
+        // ビューに渡す
+        return view('detail', compact('shop', 'tempReservation', 'reviews'));
     }
 
     public function reservation(ReservationRequest $request, $shopId)
@@ -123,5 +129,23 @@ class ShopController extends Controller
 
     public function done(){
         return view('done');
+    }
+
+    public function review(Request $request, $shopId)
+    {
+        $request->validate([
+            'comment' => 'required|string|max:1000',
+        ]);
+
+        // 投稿済みチェックや重複防止したいならここで条件つけてもOK
+
+        \App\Models\Review::create([
+            'user_id' => auth()->id(),
+            'shop_id' => $shopId,
+            'comment' => $request->input('comment'),
+            'rating' => 5,
+        ]);
+
+        return back()->with('success', 'コメントを投稿しました！');
     }
 }
