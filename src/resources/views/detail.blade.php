@@ -20,6 +20,11 @@
                     <div>
                         <div>
                             <p>{{ $review->user->name }}</p>
+                            <p class="rating-stars">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    {{ $i <= $review->rating ? '★' : '☆' }}
+                                @endfor
+                            </p>
                         </div>
                         <div>
                             <p>{{ $review->comment }}</p>
@@ -31,8 +36,18 @@
                 <div class="edit-nav">
                     <h5 class="comment-title">お店へのコメント</h5>
                 </div>
+                <form action="{{ route('detail', $shop->id) }}" method="GET">
+                    <div class="star-rating">
+                        @for ($i = 1; $i <= 5; $i++)
+                            <button type="submit" name="rating" value="{{ $i }}" style="background:none; border:none; cursor:pointer;">
+                                {{ $i <= $selectedRating ? '★' : '☆' }}
+                            </button>
+                        @endfor
+                    </div>
+                </form>
                 <form action="{{ route('review', ['shop' => $shop->id]) }}" method="post">
                     @csrf
+                    <input type="hidden" name="rating" value="{{ session('selected_rating', 5) }}">
                     <textarea name="comment" id="comment"></textarea>
                     <button type="submit">コメントを送信する</button>
                 </form>

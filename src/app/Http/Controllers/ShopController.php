@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Like;
 use App\Models\Reservation;
 use App\Http\Requests\ReservationRequest;
+use App\Models\Review;
 
 class ShopController extends Controller
 {
@@ -89,13 +90,18 @@ class ShopController extends Controller
 
         $tempReservation = session('temp_reservation');
 
-        $reviews = \App\Models\Review::where('shop_id', $shopId)
-            ->with('user') // ユーザー情報をつける（名前など）
-            ->latest()
-            ->get();
+        $selectedRating = request('rating') ?? session('selected_rating', null);
+
+        if (request('rating')) {
+            session(['selected_rating' => (int) request('rating')]);
+            return redirect()->route('detail', ['shopId' => $shopId]); // リロードしてクエリ消す
+        }
+
+        // コメント・予約情報・その他
+        $reviews = Review::where('shop_id', $shopId)->with('user')->get();
 
         // ビューに渡す
-        return view('detail', compact('shop', 'tempReservation', 'reviews'));
+        return view('detail', compact('shop', 'tempReservation', 'reviews', 'selectedRating'));
     }
 
     public function reservation(ReservationRequest $request, $shopId)
@@ -143,8 +149,10 @@ class ShopController extends Controller
             'user_id' => auth()->id(),
             'shop_id' => $shopId,
             'comment' => $request->input('comment'),
-            'rating' => 5,
+            'rating' => $request->input('rating'),
         ]);
+
+        session()->forget('selected_rating');
 
         return back()->with('success', 'コメントを投稿しました！');
     }
