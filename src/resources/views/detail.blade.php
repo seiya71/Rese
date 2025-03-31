@@ -17,40 +17,45 @@
             <div class="user-comment">
                 <h5 class="comment-title">利用者のコメント</h5>
                 @foreach ($reviews as $review)
-                    <div>
-                        <div>
-                            <p>{{ $review->user->name }}</p>
+                    <div class="comment">
+                        <div class="comment-nav">
+                            <p class="user-name">{{ $review->user->name }}</p>
                             <p class="rating-stars">
                                 @for ($i = 1; $i <= 5; $i++)
                                     {{ $i <= $review->rating ? '★' : '☆' }}
                                 @endfor
                             </p>
                         </div>
-                        <div>
-                            <p>{{ $review->comment }}</p>
+                        <div class="content">
+                            <p class="content-text">{{ $review->comment }}</p>
                         </div>
                     </div>
                 @endforeach
             </div>
             <div class="comment-edit">
-                <div class="edit-nav">
-                    <h5 class="comment-title">お店へのコメント</h5>
-                </div>
-                <form action="{{ route('detail', $shop->id) }}" method="GET">
-                    <div class="star-rating">
-                        @for ($i = 1; $i <= 5; $i++)
-                            <button type="submit" name="rating" value="{{ $i }}" style="background:none; border:none; cursor:pointer;">
-                                {{ $i <= $selectedRating ? '★' : '☆' }}
-                            </button>
-                        @endfor
+                @if ($canReview)
+                    <div class="edit-nav">
+                        <h5 class="comment-title">お店へのコメント</h5>
                     </div>
-                </form>
-                <form action="{{ route('review', ['shop' => $shop->id]) }}" method="post">
-                    @csrf
-                    <input type="hidden" name="rating" value="{{ session('selected_rating', 5) }}">
-                    <textarea name="comment" id="comment"></textarea>
-                    <button type="submit">コメントを送信する</button>
-                </form>
+                    <form action="{{ route('detail', $shop->id) }}" method="GET">
+                        <div class="star-rating">
+                            <p class="rating-title">お店の評価</p>
+                            @for ($i = 1; $i <= 5; $i++)
+                                <button class="rating-stars" type="submit" name="rating" value="{{ $i }}" style="background:none; border:none; cursor:pointer;">
+                                    {{ $i <= $selectedRating ? '★' : '☆' }}
+                                </button>
+                            @endfor
+                        </div>
+                    </form>
+                    <form class="edit-area" action="{{ route('review', ['shop' => $shop->id]) }}" method="post">
+                        @csrf
+                        <input type="hidden" name="rating" value="{{ session('selected_rating', 5) }}">
+                        <textarea class="text-edit" name="comment" id="comment"></textarea>
+                        <button class="comment-button" type="submit">コメントを送信する</button>
+                    </form>
+                @else
+                    <p class="info-message">※レビュー投稿は利用後に可能です。</p>
+                @endif
             </div>
         </div>
         <div class="detail-right">

@@ -97,11 +97,11 @@ class ShopController extends Controller
             return redirect()->route('detail', ['shopId' => $shopId]); // リロードしてクエリ消す
         }
 
-        // コメント・予約情報・その他
         $reviews = Review::where('shop_id', $shopId)->with('user')->get();
 
-        // ビューに渡す
-        return view('detail', compact('shop', 'tempReservation', 'reviews', 'selectedRating'));
+        $canReview = $user ? $this->canReview($user->id, $shopId) : false;
+
+        return view('detail', compact('shop', 'tempReservation', 'reviews', 'selectedRating', 'canReview'));
     }
 
     public function reservation(ReservationRequest $request, $shopId)
@@ -139,14 +139,24 @@ class ShopController extends Controller
 
     public function review(Request $request, $shopId)
     {
+        $userId = auth()->id();
+
+        $canReview = Reservation::where('user_id', $userId)
+            ->where('shop_id', $shopId)
+            ->whereNotNull('used_at')
+            ->exists();
+
+        if (!$canReview) {
+            return back()->with('error', 'このお店のレビューは投稿できません。');
+        }
+
         $request->validate([
             'comment' => 'required|string|max:1000',
+            'rating' => 'required|integer|min:1|max:5',
         ]);
 
-        // 投稿済みチェックや重複防止したいならここで条件つけてもOK
-
-        \App\Models\Review::create([
-            'user_id' => auth()->id(),
+        Review::create([
+            'user_id' => $userId,
             'shop_id' => $shopId,
             'comment' => $request->input('comment'),
             'rating' => $request->input('rating'),
@@ -154,6 +164,15 @@ class ShopController extends Controller
 
         session()->forget('selected_rating');
 
-        return back()->with('success', 'コメントを投稿しました！');
+        return back()->with('success', 'コメントと評価を投稿しました！');
     }
+
+    private function canReview($userId, $shopId)
+    {
+        return \App\Models\Reservation::where('user_id', $userId)
+            ->where('shop_id', $shopId)
+            ->whereNotNull('used_at') // ← 来店済みの判定
+            ->exists();
+    }
+
 }
