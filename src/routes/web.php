@@ -65,3 +65,5 @@ Route::post('/email/verification-notification', function (Request $request) {
 
     return back()->with('message', '確認メールを再送しました！');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::post('shops/{shop}/review', [ShopController::class, 'review'])->middleware('auth')->name('review');
