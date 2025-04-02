@@ -174,5 +174,4 @@ class ShopController extends Controller
             ->whereNotNull('used_at') // ← 来店済みの判定
             ->exists();
     }
-
 }
