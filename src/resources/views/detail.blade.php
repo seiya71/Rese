@@ -8,7 +8,7 @@
     <div class="shop-details">
         <div class="detail-left">
             <h2 class="shop-name">{{ $shop->shop_name }}</h2>
-            <img class="shop-image" src="{{ asset('images/' . $shop->image) }}" alt="{{ $shop->shop_name }}">
+            <img class="shop-image" src="{{ asset('storage/images/' . $shop->shop_image) }}" alt="{{ $shop->shop_name }}">
             <div class="category">
                 <p class="category-item">#{{ $shop->area->area_name }}</p>
                 <p class="category-item">#{{ $shop->genre->genre_name }}</p>

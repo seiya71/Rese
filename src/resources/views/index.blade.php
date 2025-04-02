@@ -40,7 +40,9 @@
     <div class="shop-list">
         @foreach ($shops as $shop)
             <div class="shop-card">
-                <div class="shop-image">店舗画像</div>
+                <div class="shop-image">
+                    <img src="{{ asset('storage/images/' . $shop->shop_image) }}" alt="{{ $shop->shop_name }}">
+                </div>
                 <div class="shop-info">
                     <h5 class="shop-name">{{ $shop->shop_name }}</h5>
                     <div class="shop-meta">
