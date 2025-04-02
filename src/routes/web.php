@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,3 +68,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 Route::post('shops/{shop}/review', [ShopController::class, 'review'])->middleware('auth')->name('review');
+
+Route::get('/admin/notice', [AdminController::class, 'showNoticeForm']);
+
+Route::post('/admin/notice', [AdminController::class, 'sendNotice']);
