@@ -267,3 +267,132 @@ main {
 .detail-button:hover {
     background: #0056b3;
 }
+
+@media screen and (max-width: 768px) {
+    .user-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        padding: 10px;
+    }
+
+    .info-left,
+    .info-right {
+        width: 100%;
+        max-width: 700px;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .info-title,
+    .reserve-info {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .shop-list {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 10px;
+        gap: 16px;
+    }
+
+    .shop-name {
+        font-size: 28px;
+    }
+
+    .shop-category {
+        font-size: 18px;
+    }
+
+    .update-button {
+        position: static;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .edit-button {
+        right: 60px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .user-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        padding: 10px;
+    }
+
+    .info-left,
+    .info-right {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .info-title,
+    .reserve-info,
+    .reserve-edit,
+    .info-detail {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .shop-list {
+        grid-template-columns: 1fr;
+        padding: 10px;
+        gap: 16px;
+    }
+
+    .shop-name {
+        font-size: 24px;
+    }
+
+    .shop-category {
+        font-size: 16px;
+    }
+
+    .reserve-info {
+        padding: 16px;
+    }
+
+    .comment-title,
+    .rating-stars {
+        font-size: 18px;
+    }
+
+    .edit-button {
+        right: 10px;
+        font-size: 14px;
+        padding: 4px 10px;
+    }
+
+    .cancel-button {
+        font-size: 14px;
+        padding: 4px 8px;
+    }
+
+    .update-button {
+        font-size: 14px;
+        padding: 10px;
+        width: 100%;
+        position: static;
+        margin-top: 10px;
+    }
+
+    .favorite-heart {
+        width: 28px;
+        height: 28px;
+    }
+
+    .detail-button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .edit-button {
+        top: 15px;
+        right: 60px;
+        font-size: 14px;
+    }
+}

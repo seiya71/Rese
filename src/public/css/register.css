@@ -77,3 +77,43 @@ main {
     cursor: pointer;
     margin-top: 10px;
 }
+
+@media screen and (max-width: 480px) {
+    .register-box {
+        width: 90%;
+        height: auto;
+    }
+
+    .register-title {
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    .card-body {
+        padding: 16px;
+    }
+
+    .register-form__input {
+        font-size: 14px;
+        padding: 6px 4px;
+    }
+
+    .register-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .icon-img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .error-box {
+        font-size: 14px;
+        padding: 0 10px;
+    }
+
+    main {
+        padding: 10px;
+    }
+}
