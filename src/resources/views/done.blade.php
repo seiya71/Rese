@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="card">
-        <h2 class="thanks-title">ご予約ありがとうございます</h2>
-        <button class="btn-login" onclick="location.href='{{ route('detail', $shopId) }}'">戻る</button>
+        <h2 class="reserve-title">ご予約ありがとうございます</h2>
+        <button class="btn-back" onclick="location.href='{{ route('detail', $shopId) }}'">戻る</button>
     </div>
 @endsection

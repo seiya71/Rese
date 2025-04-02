@@ -41,3 +41,25 @@ main {
 .btn-login:hover {
     background: #1f66d2;
 }
+
+@media screen and (max-width: 480px) {
+    .card {
+        width: 300px;
+        height: 250px;
+    }
+
+    .reserve-title {
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    .btn-back {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .icon-img {
+        width: 20px;
+        height: 20px;
+    }
+}
