@@ -72,3 +72,7 @@ Route::post('shops/{shop}/review', [ShopController::class, 'review'])->middlewar
 Route::get('/admin/notice', [AdminController::class, 'showNoticeForm']);
 
 Route::post('/admin/notice', [AdminController::class, 'sendNotice']);
+
+Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
+
+Route::get('/owner', [AdminController::class, 'owner'])->name('owner');

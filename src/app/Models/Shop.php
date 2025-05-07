@@ -54,4 +54,10 @@ class Shop extends Model
 
         return $query;
     }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }
