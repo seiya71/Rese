@@ -69,10 +69,10 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 Route::post('shops/{shop}/review', [ShopController::class, 'review'])->middleware('auth')->name('review');
 
-Route::get('/admin/notice', [AdminController::class, 'showNoticeForm']);
-
-Route::post('/admin/notice', [AdminController::class, 'sendNotice']);
+Route::post('/shopAdmin/notice', [AdminController::class, 'sendNotice']);
 
 Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
 
 Route::get('/owner', [AdminController::class, 'owner'])->name('owner');
+
+Route::get('/shopAdmin', [AdminController::class, 'shopAdmin'])->name('shopAdmin');

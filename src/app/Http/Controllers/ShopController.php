@@ -94,7 +94,7 @@ class ShopController extends Controller
 
         if (request('rating')) {
             session(['selected_rating' => (int) request('rating')]);
-            return redirect()->route('detail', ['shopId' => $shopId]); // リロードしてクエリ消す
+            return redirect()->route('detail', ['shopId' => $shopId]);
         }
 
         $reviews = Review::where('shop_id', $shopId)->with('user')->get();
@@ -171,7 +171,7 @@ class ShopController extends Controller
     {
         return \App\Models\Reservation::where('user_id', $userId)
             ->where('shop_id', $shopId)
-            ->whereNotNull('used_at') // ← 来店済みの判定
+            ->whereNotNull('used_at')
             ->exists();
     }
 }

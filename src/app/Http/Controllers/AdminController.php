@@ -8,14 +8,11 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Shop;
+use App\Models\Reservation;
 
 class AdminController extends Controller
 {
-    public function showNoticeForm()
-    {
-        $users = User::all();
-        return view('admin.notice', compact('users'));
-    }
 
     public function sendNotice(Request $request)
     {
@@ -58,8 +55,73 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'オーナー登録が完了しました');
     }
 
-    public function createShop()
+    public function shopAdmin($shopId)
     {
-        
+        $shop = Shop::with(['area', 'genre'])->findOrFail($shopId);
+
+        $reservations = Reservation::with('shop')->get();
+
+
+        return view('shopAdmin', compact('shop', 'reservations'));
+    }
+
+    public function showCreate()
+    {
+        return view('shopCreate');
+    }
+
+    public function shopCreate(Request $request)
+    {
+        $user = Auth::user();
+
+        $validatedData = $request->validated();
+
+        $shop = Shop::create([
+            'shop_name' => $validatedData['shop_name'],
+            'shop_image' => $validatedData['shop_image'] ?? null,
+            'area' => $validatedData['area'],
+            'genre' => $validatedData['genre'],
+            'introduction' => $validatedData['introduction'],
+            'user_id' => $user->id,
+        ]);
+
+        session()->forget('shop_image');
+
+        return redirect()->route('owner');
+    }
+
+    public function uploadShopImage(Request $request)
+    {
+        if ($request->hasFile('shop_image')) {
+            $path = $request->file('shop_image')->store('shop_images', 'public');
+
+            session(['shop_image' => $path]);
+
+            if (app()->runningUnitTests()) {
+                return response()->json(['shop_image' => $path]);
+            }
+
+            return back();
+        }
+
+        return back();
+    }
+
+    public function updateShop(Request $request, $shopId)
+    {
+        $user = Auth::user();
+
+        $shop = Shop::with(['area', 'genre'])->findOrFail($shopId);
+
+        if (session()->has('shop_image')) {
+            $shop->shop_image = session('shop_image');
+        }
+
+        $validatedData = $request->validated();
+        $shop->update($validatedData);
+
+        session()->forget('shop_image');
+
+        return redirect('/shopAdmin');
     }
 }
