@@ -5,25 +5,24 @@
 @endsection
 
 @section('content')
-    < class="sell-container">
         <h1 class="sell-title">店舗の作成</h1>
-        <form class="item-image" action="{{ route('uploadItemImage') }}" method="POST" enctype="multipart/form-data">
+        <form class="item-image" action="{{ route('uploadShopImage') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <p class="item-image__title">店舗画像</p>
             <div class="item-image__upload">
-                @if (session('item_image'))
+                @if (session('shop_image'))
                     <div class="preview-image">
-                        <img src="{{ asset('storage/' . session('item_image')) }}" alt="商品画像">
+                        <img src="{{ asset('storage/images/shop_images' . session('shop_images')) }}" alt="店舗画像">
                     </div>
                 @endif
                 <div class="button-box">
                     <label class="upload-button" for="item_image">画像を選択する</label>
-                    <input class="img-label" type="file" name="item_image" id="item_image" accept="image/*"
+                    <input class="img-label" type="file" name="shop_image" id="shop_image" accept="image/*"
                         onchange="this.form.submit()">
                 </div>
             </div>
         </form>
-        <form action="{{ route('sell') }}" method="POST">
+        <form action="{{ route('shopCreate') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label class="description-label" for="item-name">店舗名</label>

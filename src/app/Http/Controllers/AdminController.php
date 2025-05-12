@@ -10,6 +10,9 @@ use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Shop;
 use App\Models\Reservation;
+use App\Models\Area;
+use App\Models\Genre;
+use App\Http\Requests\ShopUpdateRequest;
 
 class AdminController extends Controller
 {
@@ -61,8 +64,14 @@ class AdminController extends Controller
 
         $reservations = Reservation::with('shop')->get();
 
+        $users = User::select('id', 'name', 'email')->get();
 
-        return view('shopAdmin', compact('shop', 'reservations'));
+        $areas = Area::all();
+
+        $genres = Genre::all();
+
+
+        return view('shopAdmin', compact('shop', 'reservations','users', 'areas', 'genres'));
     }
 
     public function showCreate()
@@ -107,21 +116,18 @@ class AdminController extends Controller
         return back();
     }
 
-    public function updateShop(Request $request, $shopId)
+    public function shopUpdate(ShopUpdateRequest $request, $shopId)
     {
-        $user = Auth::user();
-
-        $shop = Shop::with(['area', 'genre'])->findOrFail($shopId);
+        $shop = Shop::findOrFail($shopId);
 
         if (session()->has('shop_image')) {
             $shop->shop_image = session('shop_image');
         }
 
-        $validatedData = $request->validated();
-        $shop->update($validatedData);
+        $shop->update($request->validated());
 
         session()->forget('shop_image');
 
-        return redirect('/shopAdmin');
+        return redirect()->route('shopAdmin', ['shopId' => $shop->id]);
     }
 }

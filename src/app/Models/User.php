@@ -23,6 +23,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'email_verified_at',
+        'role',
     ];
 
     /**
@@ -66,6 +68,7 @@ class User extends Authenticatable implements MustVerifyEmail
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'email_verified_at' => now(),
             'role' => 'owner'
         ]);
     }

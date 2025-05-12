@@ -75,4 +75,14 @@ Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
 
 Route::get('/owner', [AdminController::class, 'owner'])->name('owner');
 
-Route::get('/shopAdmin', [AdminController::class, 'shopAdmin'])->name('shopAdmin');
+Route::get('/shopAdmin/{shopId}', [AdminController::class, 'shopAdmin'])->name('shopAdmin');
+
+Route::get('/shopCreate', [AdminController::class, 'showCreate'])->name('showCreate');
+
+Route::post('/uploadShopImage', [AdminController::class, 'uploadShopImage'])->name('uploadShopImage');
+
+Route::post('/shopCreate', [AdminController::class, 'shopCreate'])->name('shopCreate');
+
+Route::post('/ownerRegister', [AdminController::class, 'ownerRegister'])->name('ownerRegister');
+
+Route::put('/shopUpdate/{shopId}', [AdminController::class, 'shopUpdate'])->name('shopUpdate');

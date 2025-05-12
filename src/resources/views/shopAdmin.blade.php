@@ -1,19 +1,61 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/detail.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/shopAdmin.css') }}">
 @endsection
 
 @section('content')
-    <div class="shop-details">
+    <div class="shopAdmin-container">
         <div class="shop-detail">
-            <h2 class="shop-name">{{ $shop->shop_name }}</h2>
-            <img class="shop-image" src="{{ asset('storage/images/' . $shop->shop_image) }}" alt="{{ $shop->shop_name }}">
+            <div class="detail-header">
+                <div class="header-item">
+                    <a href="/owner">＜</a>
+                    <h2 class="shop-name">{{ $shop->shop_name }}</h2>
+                </div>
+            </div>
+            <img class="shop-image" src="{{ asset('storage/images/shop_images' . $shop->shop_image) }}"
+                alt="{{ $shop->shop_name }}">
             <div class="category">
                 <p class="category-item">#{{ $shop->area->area_name }}</p>
                 <p class="category-item">#{{ $shop->genre->genre_name }}</p>
             </div>
             <p class="introduction">{{ $shop->introduction }}</p>
+            <input class="update-toggle" type="checkbox" id="update-toggle" hidden>
+            <label class="update-button" for="update-toggle">変更</label>
+            <form class="update-edit" action="{{ route('shopUpdate', $shop->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="info-row">
+                    <div class="label">店舗名</div>
+                    <label class="update-value">
+                        <input type="text" name="shop_name"
+                            value="{{ $shop->shop_name }}" required>
+                    </label>
+                </div>
+                <div class="info-row">
+                    <div class="label">エリア</div>
+                    <select class="update-value" name="area" required>
+                        @foreach ($areas as $area)
+                            <option value="{{ $area->id }}" {{ $area->id === $shop->area_id ? 'selected' : '' }}>
+                                {{ $area->area_name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="info-row">
+                    <div class="label">ジャンル</div>
+                    <select class="update-value" name="genre" required>
+                        @foreach ($genres as $genre)
+                            <option value="{{ $genre->id }}" {{ $genre->id === $shop->genre_id ? 'selected' : '' }}>
+                                {{ $genre->genre_name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <label class="introduction" for="introduction">店舗紹介</label>
+                <textarea class="introduction-textarea" id="introduction" name="introduction" required>{{ $shop->introduction }}</textarea>
+                <button type="submit" class="update-button">更新する</button>
+            </form>
         </div>
         <div class="shop-info">
             <div>
