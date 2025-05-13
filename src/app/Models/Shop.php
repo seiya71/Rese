@@ -17,6 +17,7 @@ class Shop extends Model
         'introduction',
         'area_id',
         'genre_id',
+        'user_id',
     ];
 
     public function area()

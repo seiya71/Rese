@@ -12,7 +12,7 @@ use App\Models\Shop;
 use App\Models\Reservation;
 use App\Models\Area;
 use App\Models\Genre;
-use App\Http\Requests\ShopUpdateRequest;
+use App\Http\Requests\ShopRequest;
 
 class AdminController extends Controller
 {
@@ -76,23 +76,32 @@ class AdminController extends Controller
 
     public function showCreate()
     {
-        return view('shopCreate');
+        $user = Auth::user();
+
+        $areas = Area::all();
+
+        $genres = Genre::all();
+
+        return view('shopCreate', compact('user', 'areas', 'genres'));
     }
 
-    public function shopCreate(Request $request)
+    public function shopCreate(ShopRequest $request)
     {
         $user = Auth::user();
 
         $validatedData = $request->validated();
 
+        $imagePath = $validatedData['shop_image'] ?? session('shop_image');
+
         $shop = Shop::create([
             'shop_name' => $validatedData['shop_name'],
-            'shop_image' => $validatedData['shop_image'] ?? null,
-            'area' => $validatedData['area'],
-            'genre' => $validatedData['genre'],
+            'shop_image' => $imagePath ?? null,
+            'area_id' => $validatedData['area'],
+            'genre_id' => $validatedData['genre'],
             'introduction' => $validatedData['introduction'],
             'user_id' => $user->id,
         ]);
+
 
         session()->forget('shop_image');
 
@@ -116,7 +125,7 @@ class AdminController extends Controller
         return back();
     }
 
-    public function shopUpdate(ShopUpdateRequest $request, $shopId)
+    public function shopUpdate(ShopRequest $request, $shopId)
     {
         $shop = Shop::findOrFail($shopId);
 

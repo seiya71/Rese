@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ShopUpdateRequest extends FormRequest
+class ShopRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,10 @@ class ShopUpdateRequest extends FormRequest
     {
         return [
             'shop_name' => 'required|string|max:255',
-            //'shop_image' => 'required|string',
-            'area' => 'required|integer|exists:genres,id',
+            'shop_image' => 'nullable|string',
+            'area' => 'required|integer|exists:areas,id',
             'genre' => 'required|integer|exists:genres,id',
-            'introduction' => 'required|string',
+            'introduction' => 'nullable|string|max:1000',
         ];
     }
 }
