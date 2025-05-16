@@ -13,9 +13,11 @@ class Shop extends Model
 
     protected $fillable = [
         'shop_name',
+        'shop_image',
         'introduction',
         'area_id',
         'genre_id',
+        'user_id',
     ];
 
     public function area()
@@ -54,4 +56,10 @@ class Shop extends Model
 
         return $query;
     }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

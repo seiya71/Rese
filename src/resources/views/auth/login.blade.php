@@ -42,7 +42,3 @@
         </div>
     </div>
 @endsection
-
-@if(session()->has('redirect_after_login'))
-    @include('auth.post_redirect')
-@endif

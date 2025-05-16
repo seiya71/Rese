@@ -6,26 +6,27 @@
 
 @section('search')
     <form class="search-form" action="/search" method="GET">
-        <div class="search-select">
-            <select name="area" class="search-dropdown">
-                <option value="">All area</option>
-                @foreach ($areas as $area)
-                    <option value="{{ $area->id }}" {{ request('area') == $area->id ? 'selected' : '' }}>
-                        {{ $area['area_name'] }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="search-select">
-            <select name="genre" class="search-dropdown">
-                <option value="">All genre</option>
-                @foreach ($genres as $genre)
-                    <option value="{{ $genre->id }}" {{ request('genre') == $genre->id ? 'selected' : '' }}>
-                        {{ $genre['genre_name'] }}
-                    </option>
-                @endforeach
-            </select>
+        <div class="search-row">
+            <div class="search-select">
+                <select name="area" class="search-dropdown">
+                    <option value="">All area</option>
+                    @foreach ($areas as $area)
+                        <option value="{{ $area->id }}" {{ request('area') == $area->id ? 'selected' : '' }}>
+                            {{ $area['area_name'] }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="search-select">
+                <select name="genre" class="search-dropdown">
+                    <option value="">All genre</option>
+                    @foreach ($genres as $genre)
+                        <option value="{{ $genre->id }}" {{ request('genre') == $genre->id ? 'selected' : '' }}>
+                            {{ $genre['genre_name'] }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
         <div class="search-input-container">
@@ -39,7 +40,9 @@
     <div class="shop-list">
         @foreach ($shops as $shop)
             <div class="shop-card">
-                <div class="shop-image">店舗画像</div>
+                <div class="shop-image">
+                    <img src="{{ asset('storage/images/' . $shop->shop_image) }}" alt="{{ $shop->shop_name }}">
+                </div>
                 <div class="shop-info">
                     <h5 class="shop-name">{{ $shop->shop_name }}</h5>
                     <div class="shop-meta">

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Like;
 use App\Models\Reservation;
 use App\Http\Requests\ReservationRequest;
+use App\Models\Review;
 
 class ShopController extends Controller
 {
@@ -89,17 +90,28 @@ class ShopController extends Controller
 
         $tempReservation = session('temp_reservation');
 
-        return view('detail', compact('shop', 'tempReservation'));
+        $selectedRating = request('rating') ?? session('selected_rating', null);
+
+        if (request('rating')) {
+            session(['selected_rating' => (int) request('rating')]);
+            return redirect()->route('detail', ['shopId' => $shopId]);
+        }
+
+        $reviews = Review::where('shop_id', $shopId)->with('user')->get();
+
+        $canReview = $user ? $this->canReview($user->id, $shopId) : false;
+
+        return view('detail', compact('shop', 'tempReservation', 'reviews', 'selectedRating', 'canReview'));
     }
 
     public function reservation(ReservationRequest $request, $shopId)
     {
-        $user = Auth::user();
-
-        if (!$user) {
-            session(['redirect_after_login' => route('detail', $shopId)]);
+        if (!Auth::check()) {
+            session(['redirect_after_login' => route('detail', ['id' => $shopId])]);
             return redirect()->route('login');
         }
+
+        $user = Auth::user();
 
         $tempReservation = session('temp_reservation');
 
@@ -123,5 +135,43 @@ class ShopController extends Controller
 
     public function done(){
         return view('done');
+    }
+
+    public function review(Request $request, $shopId)
+    {
+        $userId = auth()->id();
+
+        $canReview = Reservation::where('user_id', $userId)
+            ->where('shop_id', $shopId)
+            ->whereNotNull('used_at')
+            ->exists();
+
+        if (!$canReview) {
+            return back()->with('error', 'このお店のレビューは投稿できません。');
+        }
+
+        $request->validate([
+            'comment' => 'required|string|max:1000',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        Review::create([
+            'user_id' => $userId,
+            'shop_id' => $shopId,
+            'comment' => $request->input('comment'),
+            'rating' => $request->input('rating'),
+        ]);
+
+        session()->forget('selected_rating');
+
+        return back()->with('success', 'コメントと評価を投稿しました！');
+    }
+
+    private function canReview($userId, $shopId)
+    {
+        return \App\Models\Reservation::where('user_id', $userId)
+            ->where('shop_id', $shopId)
+            ->whereNotNull('used_at')
+            ->exists();
     }
 }

@@ -1,0 +1,38 @@
+.shopAdmin-container {
+    display: flex;
+    justify-content: center;
+    gap: 120px;
+}
+
+.shop-detail {
+    width: 570px;
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-item {
+    display: flex;
+}
+
+.update-button {
+  cursor: pointer;
+  display: inline-block;
+  z-index: 1;
+  position: relative;
+}
+
+.update-edit {
+  display: none;
+}
+
+.update-toggle:checked + .update-button + .update-edit {
+  display: block;
+}
+
+
+.shop-info {
+    width: 570px;
+}
