@@ -23,6 +23,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'email_verified_at',
+        'role',
     ];
 
     /**
@@ -51,12 +53,29 @@ class User extends Authenticatable implements MustVerifyEmail
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => 'user'
         ]);
     }
 
     public function likes(): HasMany
     {
         return $this->hasMany(Like::class);
+    }
+
+    public static function createOwner($data)
+    {
+        return self::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'email_verified_at' => now(),
+            'role' => 'owner'
+        ]);
+    }
+
+    public function shops()
+    {
+        return $this->hasMany(Shop::class);
     }
 
 }

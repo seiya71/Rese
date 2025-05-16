@@ -69,6 +69,20 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 Route::post('shops/{shop}/review', [ShopController::class, 'review'])->middleware('auth')->name('review');
 
-Route::get('/admin/notice', [AdminController::class, 'showNoticeForm']);
+Route::post('/shopAdmin/notice', [AdminController::class, 'sendNotice']);
 
-Route::post('/admin/notice', [AdminController::class, 'sendNotice']);
+Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
+
+Route::get('/owner', [AdminController::class, 'owner'])->name('owner');
+
+Route::get('/shopAdmin/{shopId}', [AdminController::class, 'shopAdmin'])->name('shopAdmin');
+
+Route::get('/shopCreate', [AdminController::class, 'showCreate'])->name('showCreate');
+
+Route::post('/uploadShopImage', [AdminController::class, 'uploadShopImage'])->name('uploadShopImage');
+
+Route::post('/shopCreate', [AdminController::class, 'shopCreate'])->name('shopCreate');
+
+Route::post('/ownerRegister', [AdminController::class, 'ownerRegister'])->name('ownerRegister');
+
+Route::put('/shopUpdate/{shopId}', [AdminController::class, 'shopUpdate'])->name('shopUpdate');

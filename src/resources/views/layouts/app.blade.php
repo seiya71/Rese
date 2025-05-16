@@ -30,6 +30,8 @@
                         </form>
                     </li>
                     <li class="menu-item"><a class="menu-item__text" href="/mypage">Mypage</a></li>
+                    <li class="menu-item"><a class="menu-item__text" href="/admin">Admin</a></li>
+                    <li class="menu-item"><a class="menu-item__text" href="/owner">Owner</a></li>
                 @else
                     <li class="menu-item"><a class="menu-item__text" href="/">Home</a></li>
                     <li class="menu-item"><a class="menu-item__text" href="/register">Register</a></li>

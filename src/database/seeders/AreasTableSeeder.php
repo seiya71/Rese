@@ -15,12 +15,9 @@ class AreasTableSeeder extends Seeder
     public function run(): void
     {
         $areas = [
-            ['area_name' => '東京'],
-            ['area_name' => '千葉'],
-            ['area_name' => '埼玉'],
-            ['area_name' => '神奈川'],
-            ['area_name' => '茨城'],
-            ['area_name' => '群馬'],
+            ['area_name' => '東京都'],
+            ['area_name' => '大阪府'],
+            ['area_name' => '福岡県'],
         ];
 
         DB::table('areas')->insert($areas);
