@@ -63,7 +63,7 @@
                 @if (session('status'))
                     <p style="color: green;">{{ session('status') }}</p>
                 @endif
-                <form action="/admin/notice" method="POST">
+                <form action="/shopAdmin/notice" method="POST">
                     @csrf
                     <div>
                         <label>対象ユーザー：</label>
