@@ -10,6 +10,7 @@ use App\Models\Like;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Endroid\QrCode\Builder\Builder;
 
 class UserController extends Controller
 {
@@ -81,7 +82,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $reservations = Reservation::with('shop')->where('user_id', $user->id)->get();
+        $reservations = Reservation::with(['shop', 'user'])->where('user_id', $user->id)->get();
 
 
         $likeShops = Like::with(['shop.area', 'shop.genre'])->where('user_id', $user->id)->get();

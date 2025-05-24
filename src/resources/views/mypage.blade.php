@@ -89,6 +89,23 @@
                         </div>
                         <button type="submit" class="update-button">更新する</button>
                     </form>
+                    <input class="qr-toggle" type="checkbox" id="qr-toggle-{{ $reservation->id }}" hidden>
+                    <label class="qr-button" for="qr-toggle-{{ $reservation->id }}">QRコードを表示</label>
+                    <div class="qr-content">
+                        @php
+                            $qrData = "【予約情報】\n"
+                                . "店名：{$reservation->shop->shop_name}\n"
+                                . "予約者：{$reservation->user->name}\n"
+                                . "日付：" . \Carbon\Carbon::parse($reservation->reservation_datetime)->toDateString() . "\n"
+                                . "時間：" . \Carbon\Carbon::parse($reservation->reservation_datetime)->format('H:i') . "\n"
+                                . "人数：{$reservation->guest_count}人";
+                            $qr = \Endroid\QrCode\Builder\Builder::create()->data($qrData)->size(200)->build();
+                            $qrBase64 = base64_encode($qr->getString());
+                        @endphp
+                        <div class="qr-image">
+                            <img src="data:image/png;base64,{{ $qrBase64 }}" alt="QRコード">
+                        </div>
+                    </div>
                 </div>
             @endforeach
         </div>
