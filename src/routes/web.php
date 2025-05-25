@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,3 +87,8 @@ Route::post('/shopCreate', [AdminController::class, 'shopCreate'])->name('shopCr
 Route::post('/ownerRegister', [AdminController::class, 'ownerRegister'])->name('ownerRegister');
 
 Route::put('/shopUpdate/{shopId}', [AdminController::class, 'shopUpdate'])->name('shopUpdate');
+
+Route::get('/amount/{reservation}', [PaymentController::class, 'amountForm'])->name('amount');
+
+Route::post('/payment/charge', [PaymentController::class, 'charge'])->name('payment.charge');
+

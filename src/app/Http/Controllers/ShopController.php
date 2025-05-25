@@ -11,6 +11,8 @@ use App\Models\Like;
 use App\Models\Reservation;
 use App\Http\Requests\ReservationRequest;
 use App\Models\Review;
+use Stripe\Stripe;
+use Stripe\Checkout\Session as StripeSession;
 
 class ShopController extends Controller
 {
@@ -121,7 +123,7 @@ class ShopController extends Controller
 
         $reservationDatetime = $tempReservation['date'] . ' ' . $tempReservation['time'];
 
-        Reservation::createReservation(
+        $reservation = Reservation::createReservation(
             $user->id,
             $shopId,
             $reservationDatetime,
@@ -130,10 +132,10 @@ class ShopController extends Controller
 
         session()->forget('temp_reservation');
 
-        return redirect()->route('done', ['shopId' => $shopId]);
+        return redirect()->route('amount', ['reservation' => $reservation->id]);
     }
 
-    public function done(){
+    public function done(Request $request){
         return view('done');
     }
 
