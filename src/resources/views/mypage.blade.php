@@ -114,7 +114,7 @@
             <div class="shop-list">
                 @foreach ($likeShops as $like)
                     <div class="shop-card">
-                        <img class="shop-image" src="{{ asset('storage/images/' . $like->shop->shop_image) }}" alt="{{ $like->shop->shop_name }}">
+                        <img class="shop-image" src="{{ asset('storage/images/shop_images/' . $like->shop->shop_image) }}" alt="{{ $like->shop->shop_name }}">
 
                         <div class="shop-info">
                             <h3 class="shop-name">{{ $like->shop->shop_name }}</h3>

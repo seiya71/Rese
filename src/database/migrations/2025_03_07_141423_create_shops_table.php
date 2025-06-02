@@ -13,9 +13,11 @@ return new class extends Migration {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
             $table->string('shop_name');
+            $table->string('shop_image')->nullable();
             $table->text('introduction');
             $table->foreignId('area_id')->constrained();
             $table->foreignId('genre_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

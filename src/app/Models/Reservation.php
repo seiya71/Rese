@@ -14,6 +14,7 @@ class Reservation extends Model
         'guest_count',
         'shop_id',
         'user_id',
+        'used_at'
     ];
 
     public static function createReservation($userId, $shopId, $datetime, $guestCount)
@@ -22,7 +23,8 @@ class Reservation extends Model
             'user_id' => $userId,
             'shop_id' => $shopId,
             'reservation_datetime' => $datetime,
-            'guest_count' => $guestCount
+            'guest_count' => $guestCount,
+            'used_at' => now(),
         ]);
     }
 

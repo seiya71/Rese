@@ -24,11 +24,11 @@
   position: relative;
 }
 
-.update-edit {
+.edit-mode {
   display: none;
 }
 
-.update-toggle:checked + .update-button + .update-edit {
+.update-toggle:checked + .update-button + .edit-mode {
   display: block;
 }
 
