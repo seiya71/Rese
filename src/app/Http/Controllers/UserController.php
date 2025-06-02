@@ -112,7 +112,6 @@ class UserController extends Controller
             'guest_count' => 'required|integer|min:1',
         ]);
 
-        // 日付と時間を合わせて datetime にする
         $datetime = $request->date . ' ' . $request->time;
 
         $reservation->reservation_datetime = $datetime;
@@ -121,5 +120,4 @@ class UserController extends Controller
 
         return redirect()->route('mypage')->with('status', '予約を変更しました');
     }
-
 }

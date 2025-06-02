@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->datetime('reservation_datetime');
             $table->integer('guest_count');
-            $table->foreignId('shop_id')->constrained();
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('shop_id')->constrained();
+            $table->timestamp('used_at')->nullable();
             $table->timestamps();
         });
     }
