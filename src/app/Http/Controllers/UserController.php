@@ -11,6 +11,7 @@ use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Endroid\QrCode\Builder\Builder;
+use Illuminate\Auth\Events\Registered;
 
 class UserController extends Controller
 {
@@ -20,7 +21,7 @@ class UserController extends Controller
 
         Auth::login($user);
 
-        $user->sendEmailVerificationNotification();
+        event(new Registered($user));
 
         return redirect('/email/verify');
     }
