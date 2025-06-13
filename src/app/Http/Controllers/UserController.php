@@ -85,11 +85,47 @@ class UserController extends Controller
 
         $reservations = Reservation::with(['shop', 'user'])->where('user_id', $user->id)->get();
 
+        foreach ($reservations as $reservation) {
+            $reservation->qrData = $this->generateQrData($reservation);
+            $reservation->qrBase64 = base64_encode(
+                Builder::create()
+                    ->data($reservation->qrData)
+                    ->size(200)
+                    ->build()
+                    ->getString()
+            );
+        }
 
         $likeShops = Like::with(['shop.area', 'shop.genre'])->where('user_id', $user->id)->get();
 
         return view('mypage', compact('user', 'reservations', 'likeShops'));
     }
+
+    private function generateQrData($reservation): string
+    {
+        return "【予約情報】\n"
+            . "店名：{$reservation->shop->shop_name}\n"
+            . "予約者：{$reservation->user->name}\n"
+            . "日付：" . \Carbon\Carbon::parse($reservation->reservation_datetime)->toDateString() . "\n"
+            . "時間：" . \Carbon\Carbon::parse($reservation->reservation_datetime)->format('H:i') . "\n"
+            . "人数：{$reservation->guest_count}人";
+    }
+
+    public function qrcode($id)
+    {
+        $reservation = Reservation::with('shop', 'user')->findOrFail($id);
+
+        $qrData = "【予約情報】\n"
+            . "店名：{$reservation->shop->shop_name}\n"
+            . "予約者：{$reservation->user->name}\n"
+            . "日付：" . Carbon::parse($reservation->reservation_datetime)->toDateString() . "\n"
+            . "時間：" . Carbon::parse($reservation->reservation_datetime)->format('H:i') . "\n"
+            . "人数：{$reservation->guest_count}人";
+
+        return response($qrData, 200)
+            ->header('Content-Type', 'text/plain');
+    }
+
 
     public function done(){
         return view('done');
