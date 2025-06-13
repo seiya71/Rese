@@ -10,6 +10,8 @@ use App\Models\Like;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Endroid\QrCode\Builder\Builder;
+use Illuminate\Auth\Events\Registered;
 
 class UserController extends Controller
 {
@@ -19,7 +21,7 @@ class UserController extends Controller
 
         Auth::login($user);
 
-        $user->sendEmailVerificationNotification();
+        event(new Registered($user));
 
         return redirect('/email/verify');
     }
@@ -81,13 +83,49 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $reservations = Reservation::with('shop')->where('user_id', $user->id)->get();
+        $reservations = Reservation::with(['shop', 'user'])->where('user_id', $user->id)->get();
 
+        foreach ($reservations as $reservation) {
+            $reservation->qrData = $this->generateQrData($reservation);
+            $reservation->qrBase64 = base64_encode(
+                Builder::create()
+                    ->data($reservation->qrData)
+                    ->size(200)
+                    ->build()
+                    ->getString()
+            );
+        }
 
         $likeShops = Like::with(['shop.area', 'shop.genre'])->where('user_id', $user->id)->get();
 
         return view('mypage', compact('user', 'reservations', 'likeShops'));
     }
+
+    private function generateQrData($reservation): string
+    {
+        return "【予約情報】\n"
+            . "店名：{$reservation->shop->shop_name}\n"
+            . "予約者：{$reservation->user->name}\n"
+            . "日付：" . \Carbon\Carbon::parse($reservation->reservation_datetime)->toDateString() . "\n"
+            . "時間：" . \Carbon\Carbon::parse($reservation->reservation_datetime)->format('H:i') . "\n"
+            . "人数：{$reservation->guest_count}人";
+    }
+
+    public function qrcode($id)
+    {
+        $reservation = Reservation::with('shop', 'user')->findOrFail($id);
+
+        $qrData = "【予約情報】\n"
+            . "店名：{$reservation->shop->shop_name}\n"
+            . "予約者：{$reservation->user->name}\n"
+            . "日付：" . Carbon::parse($reservation->reservation_datetime)->toDateString() . "\n"
+            . "時間：" . Carbon::parse($reservation->reservation_datetime)->format('H:i') . "\n"
+            . "人数：{$reservation->guest_count}人";
+
+        return response($qrData, 200)
+            ->header('Content-Type', 'text/plain');
+    }
+
 
     public function done(){
         return view('done');
@@ -111,7 +149,6 @@ class UserController extends Controller
             'guest_count' => 'required|integer|min:1',
         ]);
 
-        // 日付と時間を合わせて datetime にする
         $datetime = $request->date . ' ' . $request->time;
 
         $reservation->reservation_datetime = $datetime;
@@ -120,5 +157,4 @@ class UserController extends Controller
 
         return redirect()->route('mypage')->with('status', '予約を変更しました');
     }
-
 }

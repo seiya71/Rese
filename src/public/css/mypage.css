@@ -76,6 +76,16 @@ main {
     display: none;
 }
 
+.qr-content {
+    display: none;
+    margin-top: 10px;
+}
+
+.qr-toggle:checked + .qr-button + .qr-content {
+    display: block;
+}
+
+
 .edit-button {
     display: inline-flex;
     align-items: center;

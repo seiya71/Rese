@@ -12,7 +12,7 @@
             <div class="item-image__upload">
                 @if (session('shop_image'))
                     <div class="preview-image">
-                        <img src="{{ asset('storage/' . session('shop_image')) }}" alt="店舗画像">
+                        <img src="{{ asset('storage/images/shop_images/' . session('shop_image')) }}" alt="店舗画像">
                     </div>
                 @endif
                 <div class="button-box">

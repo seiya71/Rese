@@ -9,6 +9,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Like;
+use App\Models\Review;
+use App\Models\Reservation;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -78,4 +81,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Shop::class);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }
