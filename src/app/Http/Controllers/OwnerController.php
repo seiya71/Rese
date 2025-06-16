@@ -74,7 +74,8 @@ class OwnerController extends Controller
     {
         if ($request->hasFile($inputName)) {
             $filename = $request->file($inputName)->hashName();
-            $request->file($inputName)->storeAs('images/shop_images', $filename, 'public');
+            $request->file($inputName)->store('images/shop_images', 'public');
+
             return $filename;
         }
         return null;
