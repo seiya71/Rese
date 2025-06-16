@@ -18,7 +18,7 @@ class SendReservationReminder extends Command
         $today = Carbon::today();
 
         $reservations = Reservation::with('user')
-            ->whereDate('reservation_date', $today)
+        ->whereDate('reservation_datetime', $today)
             ->get();
 
         foreach ($reservations as $reservation) {

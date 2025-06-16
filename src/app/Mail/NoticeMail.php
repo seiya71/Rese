@@ -11,15 +11,9 @@ use Illuminate\Queue\SerializesModels;
 
 class NoticeMail extends Mailable
 {
-    use Queueable, SerializesModels;
-
     public $messageBody;
-
     public $user;
 
-    /**
-     * Create a new message instance.
-     */
     public function __construct($messageBody, $user)
     {
         $this->messageBody = $messageBody;
@@ -35,5 +29,4 @@ class NoticeMail extends Mailable
                 'user' => $this->user,
             ]);
     }
-
 }
