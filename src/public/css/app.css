@@ -1,8 +1,8 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #EEEEEE;
-    max-width: 1437px;
-    min-height: 100vh;
+    width: 1437px;
+    height: 100vh;
     margin: 0;
 }
 
@@ -70,8 +70,8 @@ header {
     position: fixed;
     top: 14px;
     left: 22px;
-    min-width: 1392px;
-    min-height: 788px;
+    width: 1392px;
+    height: 788px;
     background: white;
     color: white;
     text-align: center;
@@ -116,52 +116,6 @@ header {
     font-size: 45px;
 }
 
-@media screen and (max-width: 480px) {
-    body {
-        max-width: 480px;
-    }
-
-    header {
-        height: 33px;
-    }
-
-    .menu-header {
-        top: 7px;
-        left: 7px;
-        gap: 8px;
-    }
-
-    .menu-button {
-        width: 13px;
-        height: 13px;
-    }
-
-    .site-name {
-        font-size: 11px;
-    }
-
-    .menu-left {
-        margin-top: 13px;
-        margin-left: 33px;
-        gap: 6px;
-    }
-
-    .menu {
-        top: 5px;
-        left: 7px;
-        min-width: 464px;
-        min-height: 263px;
-    }
-
-    .menu-item form .logout-button {
-        font-size: 11px;
-    }
-
-    .menu-item a {
-        font-size: 15px;
-    }
-}
-
 @media screen and (max-width: 768px) {
     body {
         max-width: 768px;
@@ -195,8 +149,8 @@ header {
     .menu {
         top: 8px;
         left: 12px;
-        min-width: 743px;
-        min-height: 421px;
+        width: 743px;
+        height: 421px;
     }
 
     .menu-item form .logout-button {
@@ -205,5 +159,51 @@ header {
 
     .menu-item a {
         font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        max-width: 480px;
+    }
+
+    header {
+        height: 33px;
+    }
+
+    .menu-header {
+        top: 7px;
+        left: 7px;
+        gap: 8px;
+    }
+
+    .menu-button {
+        width: 13px;
+        height: 13px;
+    }
+
+    .site-name {
+        font-size: 11px;
+    }
+
+    .menu-left {
+        margin-top: 13px;
+        margin-left: 33px;
+        gap: 6px;
+    }
+
+    .menu {
+        top: 5px;
+        left: 7px;
+        width: 464px;
+        height: 263px;
+    }
+
+    .menu-item form .logout-button {
+        font-size: 11px;
+    }
+
+    .menu-item a {
+        font-size: 15px;
     }
 }
