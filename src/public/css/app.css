@@ -53,9 +53,11 @@ header {
 }
 
 .menu-right {
-    flex-grow: 1;
     display: flex;
     justify-content: flex-end;
+    width: 609px;
+    height: 50px;
+    margin-right: 100px;
 }
 
 .menu-toggle:checked+.menu-header .menu-button {
@@ -146,6 +148,13 @@ header {
         gap: 10px;
     }
 
+    .menu-right {
+        width: 322px;
+        height: 26px;
+        margin-right: 53px;
+    }
+    
+
     .menu {
         top: 8px;
         left: 12px;
@@ -191,6 +200,13 @@ header {
         margin-left: 33px;
         gap: 6px;
     }
+
+    .menu-right {
+        width: 200px;
+        height: 16px;
+        margin-right: 33px;
+    }
+    
 
     .menu {
         top: 5px;
