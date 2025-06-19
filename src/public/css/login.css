@@ -103,63 +103,6 @@ main {
     padding: 0px;
 }
 
-@media screen and (max-width: 480px) {
-    .error-box {
-        height: 35px;
-    }
-    
-    .error-text {
-        font-size: 6px;
-    }
-
-    .login-box {
-        width: 133px;
-        height: 92px;
-    }
-
-    .login-header {
-        height: 20px;
-    }
-
-    .login-title {
-        font-size: 5px;
-        margin-left: 6px;
-    }
-
-    .card-body {
-        height: 72px;
-    }
-
-    .login-form {
-        width: 113px;
-        height: 56px;
-        margin-top: 8px;
-    }
-
-    .login-form__group {
-        height: 8px;
-        margin-bottom: 6px;
-    }
-
-    .icon-img {
-        width: 8px;
-        height: 9px;
-        margin-right: 4px;
-    }
-
-    .login-form__input {
-        padding: 2px 1px;
-        font-size: 5px;
-    }
-
-    .login-button {
-        width: 18px;
-        height: 10px;
-        font-size: 4px;
-        margin-left: 94px;
-    }
-}
-
 @media screen and (max-width: 768px) {
     .error-box {
         height: 56px;
@@ -214,5 +157,62 @@ main {
         height: 16px;
         font-size: 7px;
         margin-left: 151px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .error-box {
+        height: 35px;
+    }
+    
+    .error-text {
+        font-size: 6px;
+    }
+
+    .login-box {
+        width: 133px;
+        height: 92px;
+    }
+
+    .login-header {
+        height: 20px;
+    }
+
+    .login-title {
+        font-size: 5px;
+        margin-left: 6px;
+    }
+
+    .card-body {
+        height: 72px;
+    }
+
+    .login-form {
+        width: 113px;
+        height: 56px;
+        margin-top: 8px;
+    }
+
+    .login-form__group {
+        height: 8px;
+        margin-bottom: 6px;
+    }
+
+    .icon-img {
+        width: 8px;
+        height: 9px;
+        margin-right: 4px;
+    }
+
+    .login-form__input {
+        padding: 2px 1px;
+        font-size: 5px;
+    }
+
+    .login-button {
+        width: 18px;
+        height: 10px;
+        font-size: 4px;
+        margin-left: 94px;
     }
 }
