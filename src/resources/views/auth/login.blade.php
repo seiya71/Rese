@@ -7,18 +7,20 @@
 @section('content')
     <div class="error-box">
         @error('name')
-            <p>{{ $message }}</p>
+            <p class="error-text">{{ $message }}</p>
         @enderror
         @error('email')
-            <p>{{ $message }}</p>
+            <p class="error-text">{{ $message }}</p>
         @enderror
         @error('password')
-            <p>{{ $message }}</p>
+            <p class="error-text">{{ $message }}</p>
         @enderror
     </div>
 
     <div class="login-box">
-        <h2 class="login-title">Login</h2>
+        <div class="login-header">
+            <p class="login-title">Login</p>
+        </div>
         <div class="card-body">
             <form class="login-form" action="/login" method="post">
                 @csrf

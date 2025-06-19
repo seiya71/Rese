@@ -36,7 +36,7 @@ main {
 
 .register-title {
     color: #FFFFFF;
-    font-size: 17;
+    font-size: 17px;
     font-weight: bold;
     margin-left: 18px;
 }
@@ -155,7 +155,7 @@ main {
         height: 10px;
         font-size: 4px;
         margin-left: 94px;
-    }    
+    }
 }
 
 @media screen and (max-width: 768px) {
