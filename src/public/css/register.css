@@ -7,55 +7,72 @@ main {
 }
 
 .error-box {
-    min-height: 10em;
-    margin-bottom: 1em;
-    font-size: 16px;
-    color: #f44336;
+    height: 105px;
+}
+
+.error-text {
+    font-size: 20px;
+    color: red;
+    margin: 0px;
 }
 
 .register-box {
-    background: #fff;
-    border-radius: 8px;
+    background: #FFFFFF;
+    border-radius: 5px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     width: 400px;
-    height: 300px;
+    height: 276px;
+}
+
+.register-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    background-color: #3560F6;
+    border-radius: 5px 5px 0 0;
 }
 
 .register-title {
-    margin: 0;
-    padding: 12px 16px;
-    background: #2979ff;
-    color: #fff;
-    display: block;
-    border-radius: 8px 8px 0 0;
+    color: #FFFFFF;
+    font-size: 17;
+    font-weight: bold;
+    margin-left: 18px;
 }
 
 .card-body {
-    padding: 20px 24px;
+    display: flex;
+    justify-content: center;
+    height: 216px;
 }
 
 .register-form {
     display: flex;
     flex-direction: column;
-    margin-bottom: 16px;
+    align-items: center;
+    width: 341px;
+    height: 170px;
+    margin-top: 26px;
 }
 
 .register-form__group {
     display: flex;
     align-items: center;
-    margin-bottom: 16px;
+    width: 100%;
+    height: 25px;
+    margin-bottom: 19px;
 }
 
 .icon-img {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
+    width: 25px;
+    height: 28px;
+    margin-right: 12px;
 }
 
 .input-wrapper {
     flex: 1;
-    border-bottom: 1px solid #555;
+    border-bottom: 1px solid #808080;
 }
 
 .register-form__input {
@@ -64,56 +81,137 @@ main {
     outline: none;
     padding: 8px 4px;
     font-size: 16px;
+    font-weight: bold;
 }
 
 .register-button {
-    display: inline-block;
-    background: #2979ff;
-    color: #fff;
-    font-size: 16px;
-    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 55px;
+    height: 31px;
+    background: #3560f6;
+    color: #FFFFFF;
+    font-size: 13px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    margin-left: 283px;
+    padding: 0px;
 }
 
 @media screen and (max-width: 480px) {
+    .error-box {
+        height: 35px;
+    }
+    
+    .error-text {
+        font-size: 6px;
+    }
+    
     .register-box {
-        width: 90%;
-        height: auto;
+        width: 133px;
+        height: 92px;
     }
-
-    .register-title {
-        font-size: 18px;
-        padding: 10px;
-    }
-
-    .card-body {
-        padding: 16px;
-    }
-
-    .register-form__input {
-        font-size: 14px;
-        padding: 6px 4px;
-    }
-
-    .register-button {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
-
-    .icon-img {
-        width: 20px;
+    
+    .register-header {
         height: 20px;
     }
+    
+    .register-title {
+        font-size: 5px;
+        margin-left: 6px;
+    }
+    
+    .card-body {
+        height: 72px;
+    }
+    
+    .register-form {
+        width: 113px;
+        height: 56px;
+        margin-top: 8px;
+    }
+    
+    .register-form__group {
+        height: 8px;
+        margin-bottom: 6px;
+    }
+    
+    .icon-img {
+        width: 8px;
+        height: 9px;
+        margin-right: 4px;
+    }
+    
+    .register-form__input {
+        padding: 2px 1px;
+        font-size: 5px;
+    }
+    
+    .register-button {
+        width: 18px;
+        height: 10px;
+        font-size: 4px;
+        margin-left: 94px;
+    }    
+}
 
+@media screen and (max-width: 768px) {
     .error-box {
-        font-size: 14px;
-        padding: 0 10px;
+        height: 56px;
     }
-
-    main {
-        padding: 10px;
+    
+    .error-text {
+        font-size: 10px;
     }
+    
+    .register-box {
+        width: 213px;
+        height: 148px;
+    }
+    
+    .register-header {
+        height: 32px;
+    }
+    
+    .register-title {
+        font-size: 8px;
+        margin-left: 10px;
+    }
+    
+    .card-body {
+        height: 116px;
+    }
+    
+    .register-form {
+        width: 181px;
+        height: 90px;
+        margin-top: 13px;
+    }
+    
+    .register-form__group {
+        height: 13px;
+        margin-bottom: 10px;
+    }
+    
+    .icon-img {
+        width: 13px;
+        height: 15px;
+        margin-right: 7px;
+    }
+    
+    .register-form__input {
+        padding: 4px 2px;
+        font-size: 8px;
+    }
+    
+    .register-button {
+        width: 29px;
+        height: 16px;
+        font-size: 7px;
+        margin-left: 151px;
+    }
+    
 }

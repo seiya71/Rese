@@ -7,17 +7,19 @@
 @section('content')
     <div class="error-box">
         @error('name')
-            <p>{{ $message }}</p>
+            <p class="error-text">{{ $message }}</p>
         @enderror
         @error('email')
-            <p>{{ $message }}</p>
+            <p class="error-text">{{ $message }}</p>
         @enderror
         @error('password')
-            <p>{{ $message }}</p>
+            <p class="error-text">{{ $message }}</p>
         @enderror
     </div>
     <div class="register-box">
-        <h2 class="register-title">Registration</h2>
+        <div class="register-header">
+            <p class="register-title">Registration</p>
+        </div>
         <div class="card-body">
             <form class="register-form" action="/register" method="post">
                 @csrf
