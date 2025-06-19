@@ -1,0 +1,88 @@
+main {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 449px;
+    height: 303px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin-top: 18px;
+}
+
+.verify-email__text {
+    width: 340px;
+    height: 24px;
+    margin: 0 0 20px;
+    font-size: 24px;
+    color: #000000;
+}
+
+.btn-email {
+    display: inline-block;
+    width: 108px;
+    height: 31px;
+    background: #3560f6;
+    color: #ffffff;
+    font-size: 14px;
+    margin-top: 48px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-login:hover {
+    background: #1f66d2;
+}
+
+@media screen and (max-width: 768px) {
+    .card {
+        width: 239px;
+        height: 162px;
+        margin-top: 10px;
+    }
+
+    .verify-email__text {
+        width: 185px;
+        height: 13px;
+        margin: 0 0 10px;
+        font-size: 13px;
+    }
+
+    .btn-email {
+        width: 58px;
+        height: 16px;
+        font-size: 7px;
+        margin-top: 26px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .card {
+        width: 149px;
+        height: 101px;
+        margin-top: 6px;
+    }
+
+    .verify-email__text {
+        width: 115px;
+        height: 8px;
+        margin: 0 0 6px;
+        font-size: 8px;
+    }
+
+    .btn-email {
+        width: 36px;
+        height: 10px;
+        font-size: 4px;
+        margin-top: 16px;
+    }
+}
