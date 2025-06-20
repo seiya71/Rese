@@ -1,15 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #eee;
-    max-width: 1920px;
-    min-width: 1100px;
-    min-height: 100vh;
+    background-color: #EEEEEE;
+    width: 1437px;
+    height: 100vh;
     margin: 0;
 }
 
 header {
     height: 100px;
-    padding: 50px;
 }
 
 .menu-toggle {
@@ -23,26 +27,14 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    gap: 23px;
     z-index: 1001;
-}
-
-.menu-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.menu-right {
-    flex-grow: 1;
-    display: flex;
-    justify-content: flex-end;
 }
 
 .menu-button {
     cursor: pointer;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     display: inline-block;
     background-image: url("../images/logo.png");
     background-size: contain;
@@ -52,14 +44,30 @@ header {
     box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
 }
 
-.menu-toggle:checked+.menu-header .menu-button {
-    background-image: url("../images/close.png");
+.site-name {
+    font-size: 32px;
+    font-weight: bold;
+    color: #3560F6;
 }
 
-.site-name {
-    font-size: 45px;
-    font-weight: bold;
-    color: blue;
+.menu-left {
+    display: flex;
+    align-items: center;
+    margin-top: 38px;
+    margin-left: 100px;
+    gap: 18px;
+}
+
+.menu-right {
+    display: flex;
+    justify-content: flex-end;
+    width: 609px;
+    height: 50px;
+    margin-right: 100px;
+}
+
+.menu-toggle:checked+.menu-header .menu-button {
+    background-image: url("../images/close.png");
 }
 
 .menu-toggle:checked+.menu-header .site-name {
@@ -68,10 +76,10 @@ header {
 
 .menu {
     position: fixed;
-    top: 0;
-    left: 0;
-    min-width: 100vw;
-    min-height: 100vh;
+    top: 14px;
+    left: 22px;
+    width: 1392px;
+    height: 788px;
     background: white;
     color: white;
     text-align: center;
@@ -99,11 +107,10 @@ header {
 .menu-item form .logout-button {
     background: none;
     border: none;
-    color: blue;
+    color: #3560F6;
     text-decoration: none;
     cursor: pointer;
-    font-size: inherit;
-    font-size: 45px;
+    font-size: 32px;
     padding: 0;
 }
 
@@ -112,98 +119,113 @@ header {
 }
 
 .menu-item a {
-    color: blue;
+    color: #3560F6;
     text-decoration: none;
     font-size: 45px;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
     body {
-        margin: 0;
-        min-width: 100vh;
-        overflow-x: hidden;
+        max-width: 768px;
     }
 
     header {
-        height: 100px;
-        padding: 20px;
-    }
-
-    .menu {
-        left: 0;
-        right: 0;
-        width: 100vw;
-        max-width: 100vw;
-        box-sizing: border-box;
-        word-break: break-word;
-        overflow-x: hidden;
-    }
-
-    .site-name {
-        font-size: 30px;
-    }
-
-    .menu-button {
-        width: 40px;
-        height: 40px;
-    }
-
-    .menu-list {
-        width: 100%;
-    }
-
-    .menu-item {
-        min-width: 100vw;;
-        overflow-wrap: break-word;
-        text-align: center;
-    }
-    
-    .menu-item a,
-    .menu-item form .logout-button {
-        display: inline-block;
-        max-width: 100%;
-        white-space: normal;
-        text-align: center;
-    }
-
-    header {
-        margin: 0 10px;
-        height: auto;
+        height: 53px;
     }
 
     .menu-header {
-        top: 10px;
-        left: 10px;
+        top: 11px;
+        left: 11px;
+        gap: 13px;
+    }
+
+    .menu-button {
+        width: 21px;
+        height: 21px;
+    }
+
+    .site-name {
+        font-size: 18px;
+    }
+
+    .menu-left {
+        margin-top: 21px;
+        margin-left: 53px;
+        gap: 10px;
+    }
+
+    .menu-right {
+        width: 322px;
+        height: 26px;
+        margin-right: 53px;
+    }
+    
+
+    .menu {
+        top: 8px;
+        left: 12px;
+        width: 743px;
+        height: 421px;
+    }
+
+    .menu-item form .logout-button {
+        font-size: 18px;
+    }
+
+    .menu-item a {
+        font-size: 24px;
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 480px) {
     body {
-        min-width: auto;
-        max-width: 100%;
-    }
-
-    .site-name {
-        font-size: 36px;
-    }
-
-    .menu-button {
-        width: 45px;
-        height: 45px;
-    }
-
-    .menu-item a,
-    .menu-item form .logout-button {
-        font-size: 36px;
+        max-width: 480px;
     }
 
     header {
-        margin: 0px;
-        height: auto;
+        height: 33px;
     }
 
     .menu-header {
-        top: 15px;
-        left: 15px;
+        top: 7px;
+        left: 7px;
+        gap: 8px;
+    }
+
+    .menu-button {
+        width: 13px;
+        height: 13px;
+    }
+
+    .site-name {
+        font-size: 11px;
+    }
+
+    .menu-left {
+        margin-top: 13px;
+        margin-left: 33px;
+        gap: 6px;
+    }
+
+    .menu-right {
+        width: 200px;
+        height: 16px;
+        margin-right: 33px;
+    }
+    
+
+    .menu {
+        top: 5px;
+        left: 7px;
+        width: 464px;
+        height: 263px;
+    }
+
+    .menu-item form .logout-button {
+        font-size: 11px;
+    }
+
+    .menu-item a {
+        font-size: 15px;
     }
 }

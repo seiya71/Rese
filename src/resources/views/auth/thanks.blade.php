@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="card">
-        <h2 class="thanks-title">会員登録ありがとうございます</h2>
+        <p class="thanks-text">会員登録ありがとうございます</p>
         <button class="btn-login" onclick="location.href='/login'">ログインする</button>
     </div>
 @endsection

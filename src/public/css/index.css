@@ -1,34 +1,36 @@
 .search-form {
     display: flex;
     align-items: center;
-    max-width: 700px;
-    width: 100%;
+    width: 609px;
+    height: 50px;
     background: white;
-    padding: 8px 15px;
     border-radius: 5px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-    font-size: 16px;
-    color: #666;
 }
 
 .search-row {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    align-items: center;
+    padding: 0 6px;
+    width: 100%;
 }
 
 .search-select {
-    position: relative;
     display: flex;
     align-items: center;
+    font-size: 16px;
+    color: #7f7f7f;
+    width: 100px;
+    height: 30px;
+    border-right: 1px solid #7f7f7f;
 }
 
 .search-dropdown {
+    width: 100%;
     border: none;
-    background: transparent;
     font-size: 16px;
-    color: black;
-    padding: 5px;
+    color: #7f7f7f;
     outline: none;
     cursor: pointer;
 }
@@ -36,41 +38,47 @@
 .search-input-container {
     display: flex;
     align-items: center;
+    width: 397px;
+    height: 30px;
 }
 
 .search-input {
     border: none;
     background: transparent;
     font-size: 16px;
-    color: #666;
-    padding: 5px;
+    color: #7f7f7f;
     outline: none;
+    width: 397px;
+    height: 30px;
 }
 
-.search-select+.search-select::before,
-.search-select+.search-input-container::before {
-    content: "|";
-    margin: 0 10px;
-    color: #aaa;
-    font-weight: bold;
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 18px;
 }
 
 .shop-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    padding: 20px;
+    width: 1241px;
+    gap: 25px 13px;
 }
 
 .shop-card {
-    background: #fff;
-    border-radius: 8px;
+    background: #ffffff;
+    border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
     aspect-ratio: 1 / 1;
+    width: 300px;
+    height: 280px;
 }
 
 .shop-card:hover {
@@ -78,43 +86,51 @@
 }
 
 .shop-image {
+    width: 300px;
+    height: 150px;
+    overflow: hidden;
+}
+
+.shop-image__img {
     width: 100%;
-    height: 50%;
+    height: 100%;
     object-fit: cover;
-    background-color: gray;
 }
 
 .shop-info {
-    padding: 20px;
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    width: 300px;
+    height: 130px;
 }
 
 .shop-name {
-    font-size: 36px;
-    font-weight: bold;
-    margin: 0px;
-    padding: 0px 10px;
+    display: flex;
+    align-items: center;
+    height: 18px;
+    font-size: 16px;
+    margin-top: 22px;
+    margin-left: 20px;
+    margin-bottom: 0px;
 }
 
 .shop-meta {
     display: flex;
     justify-content: flex-start;
-    gap: 8px;
-    padding: 0px 10px;
+    width: 281px;
+    margin-top: 9px;
+    margin-left: 19px;
 }
 
 .shop-category {
-    font-size: 24px;
+    font-size: 12px;
+    font-weight: bold;
     margin: 0px;
 }
 
 .favorite-form {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
 }
 
 .favorite-button {
@@ -124,8 +140,8 @@
 }
 
 .favorite-heart {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 30px;
     transition: transform 0.2s;
 }
 
@@ -137,19 +153,24 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 261px;
+    height: 31px;
+    margin-top: 16px;
+    margin-left: 20px;
 }
 
 .detail-button {
-    display: block;
-    text-align: center;
-    margin-top: 10px;
-    padding: 8px 15px;
-    background: #007bff;
-    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #3560F6;
+    color: #ffffff;
     border-radius: 5px;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     transition: background 0.3s;
+    width: 97px;
+    height: 31px;
 }
 
 .detail-button:hover {
@@ -157,127 +178,183 @@
 }
 
 @media screen and (max-width: 768px) {
-    body {
-        min-width: unset;
-        width: 100%;
-        overflow-x: hidden;
+    .search-form {
+        width: 322px;
+        height: 26px;
     }
-
-    .shop-list {
-        grid-template-columns: repeat(3, 1fr);
+    
+    .search-row {
+        padding: 0 3px;
     }
-
-    .shop-name {
-        font-size: 20px;
-    }
-
-    .shop-category {
-        font-size: 10px;
-    }
-
-    .favorite-heart {
-        width: 24px;
-        height: 24px;
-    }
-
-    .detail-button {
+    
+    .search-select {
         font-size: 8px;
-        padding: 6px 12px;
+        width: 52px;
+        height: 15px;
+    }
+    
+    .search-dropdown {
+        font-size: 8px;
+    }
+    
+    .search-input-container {
+        width: 210px;
+        height: 15px;
+    }
+    
+    .search-input {
+        font-size: 8px;
+        width: 210px;
+        height: 15px;
+    }
+    
+    main {
+        margin-top: 9px;
+    }
+    
+    .shop-list {
+        width: 657px;
+        gap: 13px 6px;
+    }
+    
+    .shop-card {
+        width: 159px;
+        height: 148px;
+    }
+    
+    .shop-image {
+        width: 159px;
+        height: 79px;
+    }
+    
+    .shop-info {
+        width: 159px;
+        height: 68px;
+    }
+    
+    .shop-name {
+        height: 9px;
+        font-size: 8px;
+        margin-top: 11px;
+        margin-left: 10px;
+    }
+    
+    .shop-meta {
+        width: 138px;
+        margin-top: 4px;
+        margin-left: 10px;
+    }
+    
+    .shop-category {
+        font-size: 6px;
+    }
+    
+    .favorite-heart {
+        width: 18px;
+        height: 15px;
+    }
+    
+    .shop-actions {
+        width: 138px;
+        height: 16px;
+        margin-top: 8px;
+        margin-left: 10px;
+    }
+    
+    .detail-button {
+        font-size: 6px;
+        width: 51px;
+        height: 16px;
     }
 }
 
 @media screen and (max-width: 480px) {
-    body {
-        min-width: unset;
-        width: 100%;
-        overflow-x: hidden;
-    }
-
-    .menu-header {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        gap: 10px;
-        padding: 0 10px;
-        box-sizing: border-box;
-    }
-
     .search-form {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
-        max-width: 100%;
-        width: 100%;
-        box-sizing: border-box;
+        width: 203px;
+        height: 16px;
     }
     
     .search-row {
-        display: flex;
-        gap: 10px;
-        width: 100%;
+        padding: 0 2px;
     }
     
     .search-select {
-        flex: 1;
+        font-size: 5px;
+        width: 33px;
+        height: 10px;
     }
     
-    .search-dropdown,
-    .search-input {
-        width: 100%;
-        font-size: 14px;
-        padding: 8px;
-        border-radius: 4px;
-        background-color: white;
-        box-sizing: border-box;
+    .search-dropdown {
+        font-size: 5px;
     }
     
     .search-input-container {
-        width: 100%;
+        width: 132px;
+        height: 10px;
     }
     
-    .menu-left {
-        width: 100%;
-        justify-content: first baseline;
+    .search-input {
+        font-size: 5px;
+        width: 132px;
+        height: 10px;
     }
     
-    .menu-right {
-        width: 100%;
+    main {
+        margin-top: 6px;
     }
     
-    .search-form {
-        width: 100%;
-    }
-    
-    .site-name {
-        font-size: 24px;
-    }
-
     .shop-list {
-        grid-template-columns: repeat(2, 1fr);
+        width: 413px;
+        gap: 8px 4px;
     }
-
+    
+    .shop-card {
+        width: 100px;
+        height: 93px;
+    }
+    
+    .shop-image {
+        width: 100px;
+        height: 50px;
+    }
+    
     .shop-info {
-        padding: 0px;
+        width: 100px;
+        height: 43px;
     }
-
+    
     .shop-name {
-        font-size: 16px;
+        height: 6px;
+        font-size: 5px;
+        margin-top: 7px;
+        margin-left: 6px;
     }
-
+    
+    .shop-meta {
+        width: 87px;
+        margin-top: 3px;
+        margin-left: 6px;
+    }
+    
     .shop-category {
-        font-size: 8px;
+        font-size: 4px;
     }
-
+    
     .favorite-heart {
-        width: 16px;
-        height: 16px;
+        width: 11px;
+        height: 10px;
     }
-
+    
+    .shop-actions {
+        width: 87px;
+        height: 10px;
+        margin-top: 5px;
+        margin-left: 6px;
+    }
+    
     .detail-button {
-        font-size: 6px;
-        padding: 6px 12px;
-        margin: 5px;
+        font-size: 4px;
+        width: 32px;
+        height: 10px;
     }
 }

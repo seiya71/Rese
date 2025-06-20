@@ -27,10 +27,9 @@
                     @endforeach
                 </select>
             </div>
-        </div>
-
-        <div class="search-input-container">
-            <input type="text" name="keyword" class="search-input" placeholder="Search" value="{{ request('keyword') }}">
+            <div class="search-input-container">
+                <input type="text" name="keyword" class="search-input" placeholder="Search" value="{{ request('keyword') }}">
+            </div>
         </div>
     </form>
 @endsection
@@ -41,10 +40,10 @@
         @foreach ($shops as $shop)
             <div class="shop-card">
                 <div class="shop-image">
-                    <img src="{{ asset('storage/images/shop_images/' . $shop->shop_image) }}" alt="{{ $shop->shop_name }}">
+                    <img class="shop-image__img" src="{{ asset('storage/images/shop_images/' . $shop->shop_image) }}" alt="{{ $shop->shop_name }}">
                 </div>
                 <div class="shop-info">
-                    <h5 class="shop-name">{{ $shop->shop_name }}</h5>
+                    <p class="shop-name">{{ $shop->shop_name }}</p>
                     <div class="shop-meta">
                         <p class="shop-category"><span>#</span> {{ $shop->area->area_name }}</p>
                         <p class="shop-category"><span>#</span> {{ $shop->genre->genre_name }}</p>
