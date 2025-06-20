@@ -7,20 +7,24 @@
 @section('content')
     <div class="shop-details">
         <div class="detail-left">
-            <a href="/">＜</a>
-            <h2 class="shop-name">{{ $shop->shop_name }}</h2>
-            <img class="shop-image" src="{{ asset('storage/images/shop_images/' . $shop->shop_image) }}" alt="{{ $shop->shop_name }}">
+            <div class="detail-header">
+                <a class="back-button" href="/">＜</a>
+                <p class="shop-name">{{ $shop->shop_name }}</p>
+            </div>
+            <img class="shop-image" src="{{ asset('storage/images/shop_images/' . $shop->shop_image) }}"
+                alt="{{ $shop->shop_name }}">
             <div class="category">
                 <p class="category-item">#{{ $shop->area->area_name }}</p>
                 <p class="category-item">#{{ $shop->genre->genre_name }}</p>
             </div>
             <p class="introduction">{{ $shop->introduction }}</p>
             <div class="user-comment">
-                <h5 class="comment-title">利用者のコメント</h5>
+                <p class="comment-title">利用者のコメント</p>
                 @foreach ($reviews as $review)
                     <div class="comment">
                         <div class="comment-nav">
                             <p class="user-name">{{ $review->user->name }}</p>
+                            <p class="rating-title">評価</p>
                             <p class="rating-stars">
                                 @for ($i = 1; $i <= 5; $i++)
                                     {{ $i <= $review->rating ? '★' : '☆' }}
@@ -42,7 +46,8 @@
                         <div class="star-rating">
                             <p class="rating-title">お店の評価</p>
                             @for ($i = 1; $i <= 5; $i++)
-                                <button class="rating-stars" type="submit" name="rating" value="{{ $i }}" style="background:none; border:none; cursor:pointer;">
+                                <button class="rating-stars" type="submit" name="rating" value="{{ $i }}"
+                                    style="background:none; border:none; cursor:pointer;">
                                     {{ $i <= $selectedRating ? '★' : '☆' }}
                                 </button>
                             @endfor
@@ -63,8 +68,8 @@
             <div class="reserve">
                 <h3 class="reserve-title">予約</h3>
                 <form class="reserve-input" action="{{ route('detail', $shop->id) }}" method="GET">
-                    <input class="reserve-input__item" type="date" name="date" value="{{ session('temp_reservation.date') }}" onchange="this.form.submit()"
-                        required>
+                    <input class="reserve-input__item" type="date" name="date"
+                        value="{{ session('temp_reservation.date') }}" onchange="this.form.submit()" required>
 
                     <select class="reserve-input__item" name="time" onchange="this.form.submit()" required>
                         @for ($hour = 10; $hour < 24; $hour++)
