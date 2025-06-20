@@ -1,13 +1,19 @@
-.shop-details {
+main {
     display: flex;
     justify-content: center;
     width: 100%;
+    height: 100%;
+}
+
+.shop-details {
+    display: flex;
+    justify-content: center;
+    width: 1237px;
 }
 
 .detail-left {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
 }
 
@@ -18,72 +24,115 @@
     width: 100%;
 }
 
+.detail-header {
+    display: flex;
+    align-items: center;
+    width: 107px;
+    height: 41px;
+    margin-top: 33px;
+    gap: 12px;
+}
+
+.back-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background-color: #FFFFFF;
+    color: #000000;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
 .shop-name {
-    width: 600px;
+    display: flex;
+    align-items: center;
+    width: 56px;
+    height: 28px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #000000;
+    margin: 0px;
 }
 
 .shop-image {
-    width: 600px;
-    height: 400px;
-    background-color: gray;
+    width: 567px;
+    height: 379px;
+    margin-top: 25px;
 }
 
 .category {
     display: flex;
-    justify-content: flex-start;
-    width: 600px;
-    gap: 5px;
+    align-items: center;
+    width: 100%;
+    height: 20px;
+    margin-top: 30px;
+}
+
+.category-item {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0px;
 }
 
 .introduction {
-    width: 600px;
+    width: 568px;
+    height: auto;
 }
 
 .user-comment {
     display: flex;
     flex-direction: column;
-    width: 600px;
+    width: 572px;
     gap: 10px;
-    margin: 10px;
+    margin-top: 30px;
 }
 
 .comment-title {
-    font-size: 24px;
+    font-size: 20px;
+    font-weight: bold;
     margin: 0px;
 }
 
 .comment {
-    background-color: aliceblue;
+    width: 570px;
+    height: auto;
+    background-color: #FFFFFF;
+    border-radius: 5px;
 }
 
 .comment-nav {
     display: flex;
-    gap: 20px;
+    align-items: center;
+    width: 100%;
 }
 
 .user-name {
-    margin: 0px;
+    font-size: 24px;
+    margin-left: 10px;
+}
+
+.rating-title {
+    font-size: 20px;
+    margin-left: 35px;
 }
 
 .rating-stars {
     margin: 0px;
     font-size: 24px;
     color: yellow;
-    text-shadow:
-        -1px -1px 0 black,
-        1px -1px 0 black,
-        -1px 1px 0 black,
-        1px 1px 0 black;
+    background-color: #FFFFFF;
 }
 
 .content-text {
-    margin: 0px;
+    margin-left: 10px;
 }
 
 .comment-edit {
     display: flex;
     flex-direction: column;
-    width: 600px;
+    width: 572px;
     gap: 10px;
     margin: 10px;
 }
@@ -91,12 +140,6 @@
 .star-rating {
     display: flex;
     gap: 20px;
-}
-
-.rating-title {
-    display: flex;
-    align-items: center;
-    margin: 0px;
 }
 
 .edit-area {
@@ -112,6 +155,8 @@
 
 .comment-button {
     height: 40px;
+    background-color: #3560F6;
+    color: #FFFFFF;
 }
 
 .reserve {
@@ -120,7 +165,7 @@
     position: relative;
     width: 600px;
     height: 700px;
-    background-color: #066cf3;
+    background-color: #3560F6;
     padding: 20px;
     border-radius: 5px;
     gap: 10px;
