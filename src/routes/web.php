@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\AuthController;
 
 
 /*
@@ -74,17 +75,16 @@ Route::post('/clear-redirect-session', function () {
     return response()->json(['status' => 'cleared']);
 })->name('clear_redirect_session');
 
-Route::get('/email/verify', fn() => view('auth.verify-email'))
-    ->middleware('auth')->name('verification.notice');
-
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
-    return redirect('/thanks');
-})->middleware(['auth', 'signed'])->name('verification.verify');
-
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
-    return back()->with('message', '確認メールを再送しました！');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+Route::middleware('auth')->group(function () {
+    Route::get('/email/verify', fn() => view('auth.verify-email'))->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+        return redirect()->route('thanks');
+    })->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+        return back()->with('message', '確認メールを再送しました！');
+    })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+});
 
 Route::get('/reservation/{id}/qrcode', [UserController::class, 'qrcode'])->name('reservation.qrcode');
