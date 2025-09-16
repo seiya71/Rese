@@ -27,8 +27,6 @@ class AdminController extends Controller
         return view('admin');
     }
 
-    
-
     public function ownerRegister(RegisterRequest $request)
     {
         $user = User::createOwner($request->all());
