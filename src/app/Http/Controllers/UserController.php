@@ -15,16 +15,6 @@ use Illuminate\Auth\Events\Registered;
 
 class UserController extends Controller
 {
-    public function register(RegisterRequest $request)
-    {
-        $user = User::createUser($request->all());
-
-        Auth::login($user);
-
-        event(new Registered($user));
-
-        return redirect('/email/verify');
-    }
 
     public function thanks(){
 

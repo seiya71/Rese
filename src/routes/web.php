@@ -22,8 +22,9 @@ use App\Http\Controllers\ReservationController;
 |
 */
 
+Route::post('/register', [AuthController::class, 'register'])->name('register.user');
+
 Route::controller(UserController::class)->group(function () {
-    Route::post('/register', 'register')->name('register');
     Route::get('/thanks', 'thanks')->name('thanks');
     Route::get('/login', 'showLoginForm')->name('showLogin');
     Route::post('/login', 'login')->name('login');
@@ -61,7 +62,7 @@ Route::controller(OwnerController::class)->middleware('auth')->group(function ()
 
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'admin')->name('admin');
-    Route::post('/ownerRegister', 'ownerRegister')->name('ownerRegister');
+    Route::post('/ownerRegister', 'ownerRegister')->name('register.owner');
 });
 
 Route::get('/done/{shopId}', function ($shopId) {
