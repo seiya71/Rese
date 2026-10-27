@@ -60,11 +60,6 @@ class User extends Authenticatable implements MustVerifyEmail
         ]);
     }
 
-    public function likes(): HasMany
-    {
-        return $this->hasMany(Like::class);
-    }
-
     public static function createOwner($data)
     {
         return self::create([
@@ -74,6 +69,17 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => now(),
             'role' => 'owner'
         ]);
+    }
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new CustomVerifyEmail);
+    }
+
+
+    public function likes(): HasMany
+    {
+        return $this->hasMany(Like::class);
     }
 
     public function shops()

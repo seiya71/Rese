@@ -21,24 +21,33 @@
         </div>
         <nav class="menu">
             <ul class="menu-list">
-                @if (Auth::check())
+                @guest
                     <li class="menu-item"><a class="menu-item__text" href="/">Home</a></li>
-                    <li class="menu-item">
-                        <form action="/logout" method="post" style="display:inline;">
-                            @csrf
-                            <button class="logout-button" type="submit">Logout</button>
-                        </form>
-                    </li>
-                    <li class="menu-item"><a class="menu-item__text" href="/mypage">Mypage</a></li>
-                    <li class="menu-item"><a class="menu-item__text" href="/admin">Admin</a></li>
-                    <li class="menu-item"><a class="menu-item__text" href="/owner">Owner</a></li>
-                @else
-                    <li class="menu-item"><a class="menu-item__text" href="/">Home</a></li>
-                    <li class="menu-item"><a class="menu-item__text" href="/register">Register</a></li>
+                    <li class="menu-item"><a class="menu-item__text" href="{{ route('register.user') }}">Register</a></li>
                     <li class="menu-item">
                         <a class="menu-item__text" href="{{ route('login', ['redirect' => request()->fullUrl()]) }}">Login</a>
                     </li>
-                @endif
+                @endguest
+
+                @auth
+                <li class="menu-item"><a class="menu-item__text" href="/">Home</a></li>
+                <li class="menu-item"><a class="menu-item__text" href="/mypage">Mypage</a></li>
+
+                @role('owner')
+                <li class="menu-item"><a class="menu-item__text" href="/owner">Owner</a></li>
+                @endrole
+
+                @role('admin')
+                <li class="menu-item"><a class="menu-item__text" href="/admin">Admin</a></li>
+                @endrole
+
+                <li class="menu-item">
+                    <form action="/logout" method="post" style="display:inline;">
+                        @csrf
+                        <button class="logout-button" type="submit">Logout</button>
+                    </form>
+                </li>
+                @endauth
             </ul>
         </nav>
     </header>
